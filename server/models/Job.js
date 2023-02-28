@@ -20,23 +20,23 @@ const JobsModel = db.define(
     },
     description: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     requirement: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     salary: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     location: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     is_active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: true,
     },
     created_at: {
