@@ -54,7 +54,7 @@ To run this project, you will need to add the following environment variables to
 
 `PORT = ?`
 
-`USER = ? `
+`NAME = ? `
 
 `DATABASE_PORT = ? `
 
