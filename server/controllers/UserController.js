@@ -85,15 +85,24 @@ const loginUser = async (req, res) => {
     if (password !== user.password) {
       return res.status(400).json("Password incorrect");
     }
-    let token = jwt.sign({ id: user.userId }, "havanquocdung", {
-      expiresIn: 86400,
-    });
+    req.session.user = { userId: user.userId, role: user.role };
+    res.locals.user = req.session.user;
+    console.log(req.session.user);
     return res.json({
       message: "Login ok",
-      token: token,
+      token: req.session.user.userId,
     });
   } catch (err) {
     console.log(err);
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+const logoutUser = async (req, res) => {
+  try {
+    delete req.session.user;
+    return res.json({ message: "Logged out" });
+  } catch (err) {
     return res.status(400).json({ error: err.message });
   }
 };
@@ -154,6 +163,7 @@ module.exports = {
   getALLUsers,
   registerUser,
   loginUser,
+  logoutUser,
   privateLogin,
   getById,
   deleteUser,

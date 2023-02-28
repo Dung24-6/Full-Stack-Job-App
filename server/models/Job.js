@@ -1,62 +1,43 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/config");
 
-const UsersModel = db.define(
-  "users",
+const JobsModel = db.define(
+  "jobs",
   {
-    userId: {
+    jobId: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-    role: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
-    },
-    avatar_url: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    phone_number: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    address: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    skill: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    birth: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    sex: {
-      type: DataTypes.STRING(10),
-      allowNull: true,
-    },
-    about: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    experience: {
+    companyId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    requirement: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    salary: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    location: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
     created_at: {
       type: DataTypes.DATE,
@@ -74,4 +55,4 @@ const UsersModel = db.define(
   }
 );
 
-module.exports = { UsersModel };
+module.exports = { JobsModel };

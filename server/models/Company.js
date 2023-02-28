@@ -1,16 +1,17 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/config");
+const { JobsModel } = require("./Job");
 
-const UsersModel = db.define(
-  "users",
+const CompanyModel = db.define(
+  "company",
   {
-    userId: {
+    companyId: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    name: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
@@ -24,9 +25,14 @@ const UsersModel = db.define(
     },
     role: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
+      defaultValue: "company",
     },
-    avatar_url: {
+    logo_url: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    website_url: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
@@ -38,24 +44,8 @@ const UsersModel = db.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
-    skill: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    birth: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
-    },
-    sex: {
-      type: DataTypes.STRING(10),
-      allowNull: true,
-    },
-    about: {
+    description: {
       type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    experience: {
-      type: DataTypes.INTEGER,
       allowNull: true,
     },
     created_at: {
@@ -74,4 +64,19 @@ const UsersModel = db.define(
   }
 );
 
-module.exports = { UsersModel };
+CompanyModel.hasMany(JobsModel, {
+  foreignKey: "companyId",
+  sourceKey: "companyId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+  hooks: true,
+});
+
+JobsModel.belongsTo(CompanyModel, {
+  foreignKey: "companyId",
+  targetKey: "companyId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+});
+
+module.exports = { CompanyModel };
