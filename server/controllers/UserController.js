@@ -131,7 +131,7 @@ const uploadAvatar = async (req, res) => {
     }
 
     if (req.file) {
-      user.avatar = req.file.path;
+      user.avatar_url = req.file.path;
       await user.save();
 
       return res.status(200).json(user);
@@ -159,6 +159,30 @@ const getAvatar = async (req, res) => {
   }
 };
 
+const uploadCV = async (req, res) => {
+  try {
+    const userId = req.session.user.userId;
+    console.log(req.session.user.userId + "controller");
+    const user = await UsersModel.findOne({ where: { userId: userId } });
+    //console.log(user);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (req.file) {
+      user.cv = req.file.path;
+      await user.save();
+
+      return res.status(200).json(user);
+    } else {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   getALLUsers,
   registerUser,
@@ -169,4 +193,5 @@ module.exports = {
   deleteUser,
   uploadAvatar,
   getAvatar,
+  uploadCV,
 };

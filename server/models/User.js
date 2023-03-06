@@ -30,6 +30,10 @@ const UsersModel = db.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    cv: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     phone_number: {
       type: DataTypes.STRING(20),
       allowNull: true,
