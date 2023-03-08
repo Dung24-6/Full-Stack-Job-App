@@ -4,4 +4,6 @@ const JobController = require("../controllers/JobController");
 
 router.post("/createJob", JobController.createJob);
 
+router.get("/searchJobByLocation", JobController.searchJobByLocations);
+
 module.exports = router;
