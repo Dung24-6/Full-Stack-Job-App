@@ -1,4 +1,5 @@
 const { JobsModel } = require("../models/Job");
+const { Op } = require("sequelize");
 
 const createJob = async (req, res) => {
   const { title } = req.body;
@@ -36,7 +37,28 @@ const searchJobByLocations = async (req, res) => {
   }
 };
 
+const searchJobBySkill = async (req, res) => {
+  try {
+    const { skills } = req.query;
+
+    // Chuyển skills thành một mảng các skill
+    const skillsArr = skills.split(",");
+
+    // Tìm kiếm các công việc có chứa các skill trong mảng skillsArr
+    const jobs = await JobsModel.findAll({
+      where: {
+        skills: { [Op.overlap]: skillsArr },
+      },
+    });
+
+    return res.status(200).json(jobs);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createJob,
   searchJobByLocations,
+  searchJobBySkill,
 };
