@@ -1,5 +1,7 @@
-#upload
-uploads/
+#public
+public
+public/
+*.pdf
 
 # Logs
 logs

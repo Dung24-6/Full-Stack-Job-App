@@ -30,7 +30,10 @@ const TopCompany = () => {
         <ul>
           {topCompanies.map((company) => (
             <li key={company.companyId}>
-              <img src={company.logo_url} alt={company.name} />
+              <img
+                src={company.logo_url.replace("..\\client\\public", "\\public")}
+                alt={company.name}
+              />
               <div>
                 <h3>{company.name}</h3>
                 <p>{company.job_count} job postings</p>
