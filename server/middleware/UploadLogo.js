@@ -3,12 +3,12 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/uploads/avatars");
+    cb(null, "../client/public/uploads/logo");
   },
   filename: function (req, file, cb) {
     cb(
       null,
-      "avatar_" + req.session.user.userId + path.extname(file.originalname)
+      "logo_" + req.session.company.companyId + path.extname(file.originalname)
     );
   },
 });
@@ -21,6 +21,6 @@ const fileFilter = function (req, file, cb) {
   }
 };
 
-const uploadAvatar = multer({ storage: storage, fileFilter: fileFilter });
+const uploadLogo = multer({ storage: storage, fileFilter: fileFilter });
 
-module.exports = uploadAvatar;
+module.exports = uploadLogo;

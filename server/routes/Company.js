@@ -4,6 +4,8 @@ const CompanyController = require("../controllers/CompanyController");
 
 router.get("/", CompanyController.getALLCompany);
 
+router.get("/getTopCompanies", CompanyController.getTopCompanies);
+
 router.get("/:companyId", CompanyController.getById);
 
 router.post("/register", CompanyController.registerCompany);

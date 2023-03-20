@@ -18,12 +18,4 @@ router.post("/logout", UserController.logoutUser);
 
 router.post("/privateLogin", UserController.privateLogin);
 
-router.post(
-  "/:userId/uploadAvatar",
-  uploadAvatar.single("avatar"),
-  UserController.uploadAvatar
-);
-
-router.post("/uploadCV", uploadCV.single("cv"), UserController.uploadCV);
-
 module.exports = router;

@@ -1,4 +1,7 @@
 const { CompanyModel } = require("../models/Company");
+const { JobsModel } = require("../models/Job");
+const db = require("../config/config");
+const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 
 const getALLCompany = async (req, res) => {
@@ -18,6 +21,36 @@ const getALLCompany = async (req, res) => {
     }
   } catch (err) {
     return res.status(400).json({ error: err.message });
+  }
+};
+
+const getTopCompanies = async (req, res) => {
+  try {
+    const topCompanies = await CompanyModel.findAll({
+      attributes: [
+        "companyId",
+        "name",
+        "logo_url",
+        [db.fn("count", db.col("jobs.jobId")), "job_count"],
+      ],
+      include: [
+        {
+          model: JobsModel,
+          as: "jobs", // set the alias for the JobsModel association
+          duplicating: false,
+          where: {
+            // ???
+          },
+        },
+      ],
+      group: ["jobs.jobId", "company.companyId"],
+      order: [[db.literal("job_count"), "DESC"]],
+      limit: 10,
+    });
+    res.status(200).json(topCompanies);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error retrieving top companies" });
   }
 };
 
@@ -120,4 +153,5 @@ module.exports = {
   getById,
   deleteCompany,
   logoutCompany,
+  getTopCompanies,
 };
