@@ -1,0 +1,58 @@
+.login {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://cdn1.epicgames.com/ue/product/Screenshot/HighresScreenshot00006-1920x1080-4492761cda27fc89c9cc1e4979551e95.jpg?resize=1&w=1920");
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-bottom: 10px;
+      color: #454343;
+    }
+
+    label {
+      font-size: 14px;
+      padding: 10px 0;
+      abbr {
+        color: red;
+      }
+    }
+    input {
+      height: 40px;
+      width: 350px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 10px;
+      border-bottom: 1px solid #bbbbbb;
+    }
+    button {
+      margin: 20px 0;
+      color: #fff;
+      background-color: var(--primary);
+      font-size: 18px;
+      padding: 10px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(167, 22, 22);
+      }
+    }
+    footer {
+      font-size: 14px;
+      text-align: center;
+      a {
+        color: rgb(13, 0, 255);
+      }
+    }
+  }
+}

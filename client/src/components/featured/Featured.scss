@@ -1,0 +1,107 @@
+.featured {
+  background-color: #221f20;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .container {
+    h1 {
+      color: #fff;
+      margin-bottom: 40px;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      .location {
+        width: 200px;
+        height: 50px;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-right: 10px;
+        position: relative;
+        padding: 10px;
+        color: #464545;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        span {
+          width: 110px;
+        }
+        .options {
+          position: absolute;
+          background-color: #fff;
+          top: 110%;
+          left: 0;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          border-radius: 5px;
+          padding: 10px 0;
+          span {
+            width: 100%;
+            padding: 10px 20px;
+            &:hover {
+              background-color: #dbd9d9;
+            }
+          }
+        }
+      }
+      .searchInput {
+        height: 50px;
+        width: 500px;
+        border-radius: 5px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        svg {
+          font-size: 18px;
+          padding: 15px;
+          color: #bab6b6;
+        }
+
+        input {
+          padding: 10px;
+          outline: none;
+          font-size: 16px;
+          border: none;
+          flex: 1;
+        }
+      }
+      button {
+        margin-left: 20px;
+        height: 50px;
+        width: 130px;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        color: #fff;
+        background-color: var(--primary);
+        border: none;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(211, 5, 5);
+        }
+      }
+    }
+
+    .popular {
+      margin-top: 50px;
+      padding: 5px 0;
+      a {
+        padding: 8px 8px 8px 3px;
+        border: 0;
+        color: #fff;
+        font-size: 14px;
+        &:hover {
+          background-color: #fff;
+          color: #221f20;
+          transition: all 0.2s ease;
+        }
+      }
+    }
+  }
+}

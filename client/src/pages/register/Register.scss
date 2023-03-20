@@ -1,0 +1,62 @@
+.register {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://www.alaqsacarpets.com/wp-content/uploads/2022/03/OFFICE-CARPET-min-scaled.jpg");
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin: 0 0 10px;
+      color: #454343;
+    }
+    h1 {
+      margin: 10px 0;
+      color: #282727;
+    }
+
+    abbr {
+      color: red;
+    }
+    label {
+      font-size: 14px;
+      padding: 10px 0;
+    }
+    input {
+      height: 40px;
+      width: 350px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 10px;
+      border-bottom: 1px solid #bbbbbb;
+    }
+    button {
+      margin: 20px 0;
+      color: #fff;
+      background-color: var(--primary);
+      font-size: 18px;
+      padding: 10px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(167, 22, 22);
+      }
+    }
+    footer {
+      font-size: 14px;
+      text-align: center;
+      a {
+        color: rgb(13, 0, 255);
+      }
+    }
+  }
+}

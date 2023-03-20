@@ -1,0 +1,14 @@
+.topCompany {
+  width: 1400px;
+
+  .container {
+    h1 {
+        margin: 40px 0;
+    }
+    .listCompany {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}

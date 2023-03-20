@@ -1,0 +1,56 @@
+.jobCard {
+  width: 583px;
+  margin-right: -5px;
+  cursor: pointer;
+  &:hover {
+    h2 {
+      color: rgb(247, 36, 36);
+    }
+  }
+  border-top: 1px solid #ff9e34;
+  background-color: #fff;
+  display: flex;
+  min-height: 100px;
+
+  .logo {
+    width: 65px;
+    height: 65px;
+    flex: 0.5;
+    display: flex;
+    align-items: center;
+    margin: 30px 30px;
+
+    img {
+      border: 1px solid #bbbbbb;
+      height: 65px;
+      width: 65px;
+      object-fit: contain;
+    }
+  }
+  .about {
+    flex: 2;
+    margin: 20px 0;
+    .sallary {
+      font-size: 13px;
+      color: rgb(15, 234, 77);
+    }
+  }
+  .more {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+    font-size: 13px;
+    color: #999797;
+    padding: 20px;
+    .hot {
+      padding: 2px 10px;
+      min-width: 45px;
+      color: #fff;
+      background: #ff9e34;
+      align-self: flex-end;
+      text-align: center;
+    }
+  }
+}

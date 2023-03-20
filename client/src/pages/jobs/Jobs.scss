@@ -1,0 +1,19 @@
+.jobs {
+    display: flex;
+    justify-content: center;
+    .container {
+      width: 1400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      
+  
+      .job {
+        display: flex;
+        margin-top: 20px;
+        width: 1400px;
+      }
+    }
+  }
+  

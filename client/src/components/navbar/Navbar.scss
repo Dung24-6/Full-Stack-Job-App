@@ -1,0 +1,83 @@
+.navbar {
+  background-color: var(--secondary);
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  transition: 0.5s all ease;
+  position: sticky;
+  top: 0;
+  &.active {
+    height: 40px;
+  }
+  .container {
+    width: 1400px;
+
+    display: flex;
+    color: var(--text-color);
+    gap: 20px;
+    font-size: 15px;
+
+    .logo {
+      margin: 5px;
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .links {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      span {
+        padding: 8px;
+        &:hover {
+          background-color: #2e2a2b;
+          color: #fff;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+      .user {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .options {
+          position: absolute;
+          background-color: rgb(46, 46, 46);
+          right: 0;
+          top: 100%;
+          display: flex;
+          flex-direction: column;
+          width: 200px;
+          padding: 5px;
+          gap: 10px;
+          border-radius: 5px;
+        }
+      }
+      span {
+        padding: 8px;
+        &:hover {
+          color: #fff;
+        }
+      }
+      .link {
+        padding: 8px;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
