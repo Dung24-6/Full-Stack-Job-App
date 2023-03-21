@@ -1,8 +1,8 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import CompanyCard from "../companyCard/CompanyCard";
 import "./TopCompany.scss";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 const TopCompany = () => {
   const [topCompanies, setTopCompanies] = useState([]);

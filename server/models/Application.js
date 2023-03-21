@@ -16,13 +16,13 @@ const ApplicationModel = db.define("application", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  companyId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   cv: {
     type: DataTypes.STRING(255),
     allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING(255),
-    allowNull: true,
   },
   created_at: {
     type: DataTypes.DATE,
