@@ -30,8 +30,8 @@ First , clone project and go to client folder and  and server folder run npm ins
 
 ```bash
   cd client
-  npm install 
-  npm run start
+  yarn
+  yarn run dev
 ```
 ```bash
   cd server
