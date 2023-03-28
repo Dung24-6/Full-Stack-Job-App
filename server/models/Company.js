@@ -72,7 +72,22 @@ CompanyModel.hasMany(JobsModel, {
   hooks: true,
 });
 
+CompanyModel.hasMany(ReviewCompanyModel, {
+  foreignKey: "companyId",
+  sourceKey: "companyId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+  hooks: true,
+});
+
 JobsModel.belongsTo(CompanyModel, {
+  foreignKey: "companyId",
+  targetKey: "companyId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+});
+
+ReviewCompanyModel.belongsTo(CompanyModel, {
   foreignKey: "companyId",
   targetKey: "companyId",
   onDelete: "cascade",
