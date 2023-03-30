@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/config");
 const { JobsModel } = require("./Job");
+const { ReviewCompanyModel } = require("./ReviewCompany")
 
 const CompanyModel = db.define(
   "company",

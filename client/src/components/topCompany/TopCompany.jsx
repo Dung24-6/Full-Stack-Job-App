@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import CompanyCard from "../companyCard/CompanyCard";
 import "./TopCompany.scss";
 import axios from "axios";
+import { companys } from "../../data";
 
 const TopCompany = () => {
   const [topCompanies, setTopCompanies] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/company/getTopCompanies")
+      .get("http://localhost:8000/company")
       .then((response) => setTopCompanies(response.data))
       .catch((error) => console.error(error));
   }, []);
@@ -18,29 +19,11 @@ const TopCompany = () => {
       <div className="container">
         <h1>Top Companies</h1>
         <div className="listCompany">
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
-          <CompanyCard />
+          {topCompanies.map(company=>
+            <CompanyCard key={company.id} company={company}/>
+          )}
         </div>
-        <ul>
-          {topCompanies.map((company) => (
-            <li key={company.companyId}>
-              <img
-                src={company.logo_url.replace("..\\client\\public", "\\public")}
-                alt={company.name}
-              />
-              <div>
-                <h3>{company.name}</h3>
-                <p>{company.job_count} job postings</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        
       </div>
     </div>
   );

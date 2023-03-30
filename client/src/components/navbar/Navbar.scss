@@ -3,12 +3,13 @@
   display: flex;
   height: 60px;
   justify-content: center;
-  transition: 0.5s all ease;
+  transition: all 0.5s ease;
   position: sticky;
   top: 0;
   &.active {
     height: 40px;
   }
+  
   .container {
     width: 1400px;
 

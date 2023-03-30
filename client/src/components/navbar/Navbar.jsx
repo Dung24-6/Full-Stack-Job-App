@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
@@ -15,11 +16,12 @@ const Navbar = () => {
       window.removeEventListener("scroll", isActive);
     };
   }, []);
-  const currentUser = {
-    id: 1,
-    isCompany: true,
-    username: "Roo Jiren",
-  };
+  const currentUser = useSelector(state=>{
+    if (state.user.currentUser) {
+      return state.user.currentUser.user
+    }
+  })
+  
 
   return (
     <div className={active ? "navbar active" : "navbar"}>
@@ -52,7 +54,7 @@ const Navbar = () => {
             <>
               <div className="user" onClick={() => setOpen(!open)}>
                 <img
-                  src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd2lJTEE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d5e6535c22419e6cf6861248aec407edf8d92051/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFJc0FXa0NMQUU9IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--492f60b9aac6e8159e50e72bb289c5feb47a79d4/%5BGHTK%5D_Logo_RGB.png"
+                  src="https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
                   alt=""
                 />
                 <span>{currentUser?.username}</span>

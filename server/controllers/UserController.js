@@ -36,8 +36,8 @@ const getById = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
-  if (!(username && email && password)) {
+  const { username, email, password, role} = req.body;
+  if (!(username && email && password && role)) {
     return res.status(400).json("Not enough params");
   }
   try {
@@ -49,6 +49,7 @@ const registerUser = async (req, res) => {
         username,
         email,
         password,
+        role,
       });
       return res.json(user);
     }
@@ -89,7 +90,7 @@ const loginUser = async (req, res) => {
     res.locals.user = req.session.user;
     console.log(req.session.user);
     return res.json({
-      message: "Login ok",
+      user,
       token: req.session.user.userId,
     });
   } catch (err) {
