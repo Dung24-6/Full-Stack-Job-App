@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { publicRequest } from "../requestMethods";
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logoutSuccess } from "./userRedux";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -10,4 +9,9 @@ export const login = async (dispatch, user) => {
   } catch (error) {
     dispatch(loginFailure());
   }
+};
+
+export const logout = async (dispatch) => {
+  dispatch(logoutSuccess());
+  
 };

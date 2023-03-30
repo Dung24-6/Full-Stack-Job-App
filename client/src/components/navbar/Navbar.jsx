@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../redux/apiCalls";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch()
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -21,6 +23,9 @@ const Navbar = () => {
       return state.user.currentUser.user
     }
   })
+  const handleLogout = ()=>{
+    logout(dispatch)
+  }
   
 
   return (
@@ -49,6 +54,9 @@ const Navbar = () => {
               <Link to="/login" className="link">
                 <span>Sign in</span>
               </Link>
+              <Link to="/register" className="link">
+                <span>Sign up</span>
+              </Link>
             </>
           ) : (
             <>
@@ -66,7 +74,7 @@ const Navbar = () => {
                     <Link to="/profile" className="link">
                       Setting
                     </Link>
-                    <Link to="/login" className="link">
+                    <Link to="/login" className="link" onClick={handleLogout}>
                       Sign out
                     </Link>
                   </div>
