@@ -7,7 +7,7 @@ const CompanyCard = ({company}) => {
   return (
     <div className='companyCard'>
 
-        <Link to={`/company/${company.name}`}>
+        <Link to={`/company/${company.companyId}`}>
             <div className='logo' >
                 <img className='logo-img' src={company.logo_url} alt='logo'/></div>
             <div className='name'>{company.name}</div>

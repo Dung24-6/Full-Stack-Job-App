@@ -49,7 +49,6 @@ const registerUser = async (req, res) => {
         username,
         email,
         password,
-        role,
       });
       return res.json(user);
     }

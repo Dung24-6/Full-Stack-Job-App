@@ -11,7 +11,7 @@ import "./AboutCompany.scss";
 const AboutCompany = () => {
   return (
     <div className="aboutCompany">
-      <Link to="/company/:id">
+      <Link to="/company/MB-Bank">
         <div className="logo">
           <img
             className="logo-img"

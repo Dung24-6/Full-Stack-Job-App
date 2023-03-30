@@ -24,7 +24,7 @@ const UsersModel = db.define(
     },
     role: {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'user',
     },
     avatar_url: {
