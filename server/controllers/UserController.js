@@ -36,8 +36,8 @@ const getById = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { username, email, password, role} = req.body;
-  if (!(username && email && password && role)) {
+  const { username, email, password } = req.body;
+  if (!(username && email && password )) {
     return res.status(400).json("Not enough params");
   }
   try {
