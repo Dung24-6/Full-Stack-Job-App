@@ -57,8 +57,33 @@ const searchJobBySkill = async (req, res) => {
   }
 };
 
+const searchJob = async (req, res) => {
+  const { prompt } = req.query;
+
+  if (!prompt) {
+    return res.status(404).json("Enter a prompt to search");
+  }
+
+  try {
+    const jobs = await JobsModel.findAll({
+      where: {
+        [Op.or]: [
+          { location: { [Op.iLike]: `%${prompt}%` } },
+          { skills: { [Op.overlap]: [prompt] } },
+          { title: { [Op.iLike]: `%${prompt}%` } },
+        ],
+      },
+    });
+
+    return res.status(200).json(jobs);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createJob,
   searchJobByLocations,
   searchJobBySkill,
+  searchJob,
 };

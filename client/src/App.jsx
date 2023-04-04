@@ -11,6 +11,7 @@ import Profile from "./pages/profile/Profile";
 import Job from "./pages/job/Job";
 import Jobs from "./pages/jobs/Jobs";
 import Companies from "./pages/companies/Companies";
+import ApplyJob from "./pages/applyJob/applyJob";
 
 function App() {
   const Layout = () => {
@@ -58,6 +59,10 @@ function App() {
         {
           path: "/jobs",
           element: <Jobs />,
+        },
+        {
+          path: "/apply",
+          element: <ApplyJob />,
         },
       ],
     },
