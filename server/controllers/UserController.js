@@ -171,6 +171,44 @@ const deleteCV = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  const  userId  = req.session.user.userId;
+  const { phone_number, address, skill, birth, sex, about } = req.body;
+
+  try {
+    const user = await UsersModel.findOne({ where: { userId } });
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
+
+    // update user information if provided
+    if (phone_number) {
+      user.phone_number = phone_number;
+    }
+    if (address) {
+      user.address = address;
+    }
+    if (skill) {
+      user.skill = skill;
+    }
+    if (birth) {
+      user.birth = birth;
+    }
+    if (sex) {
+      user.sex = sex;
+    }
+    if (about) {
+      user.about = about;
+    }
+
+    await user.save();
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+
 module.exports = {
   getALLUsers,
   registerUser,
@@ -181,4 +219,5 @@ module.exports = {
   deleteUser,
   getAvatar,
   deleteCV,
+  updateUser,
 };
