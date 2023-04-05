@@ -6,6 +6,7 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("users/login", user);
     dispatch(loginSuccess(res.data));
+    document.cookie = `session=${JSON.stringify(res.data)}; path=/;`;
   } catch (error) {
     dispatch(loginFailure());
   }

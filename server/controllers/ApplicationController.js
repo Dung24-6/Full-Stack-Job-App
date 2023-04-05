@@ -3,7 +3,8 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const applyJob = async (req, res) => {
-  const { userId, cv, companyEmail, jobId } = req.body;
+  const {  cv, companyEmail, jobId } = req.body;
+  const userId  = req.session.user.userId;
 
   try {
     const jobApplication = new ApplicationModel({

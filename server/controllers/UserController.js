@@ -92,6 +92,10 @@ const loginUser = async (req, res) => {
       password: user.password,
     };
     res.locals.user = req.session.user;
+    await req.session.save();
+    res.set("userId", req.session.user.userId);
+    res.set("role", req.session.user.role);
+    res.set("email", req.session.user.email);
     console.log(req.session.user);
     return res.json({
       user,

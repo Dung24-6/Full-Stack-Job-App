@@ -5,6 +5,8 @@ const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 
 const getALLCompany = async (req, res) => {
+  //const sessionData = req.cookies.session;
+  //console.log(sessionData)
   try {
     let page = req.query.page;
     if (page) {

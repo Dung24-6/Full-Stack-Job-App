@@ -9,7 +9,9 @@ const TopCompany = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/company")
+      .get("http://localhost:8000/company", {
+        withCredentials: true,
+      })
       .then((response) => setTopCompanies(response.data))
       .catch((error) => console.error(error));
   }, []);
