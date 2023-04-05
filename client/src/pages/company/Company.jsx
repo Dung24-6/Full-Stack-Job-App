@@ -28,7 +28,6 @@ const Company = () => {
           `http://localhost:8000/company/${companyId}`
         );
 
-        console.log(res.data);
         setCompany(res.data);
       } catch (error) {
         console.log(error);

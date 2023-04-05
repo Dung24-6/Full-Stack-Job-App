@@ -15,7 +15,7 @@ const JobCard = () => {
       </div>
       <div className="about">
         <Link to="/job">
-          <h2>Frontend Dev</h2>
+          <h2></h2>
         </Link>
         <div className="sallary">
           <FontAwesomeIcon icon={faDollar} />
@@ -28,7 +28,7 @@ const JobCard = () => {
       </div>
       <div className="more">
         <div className="hot">Hot</div>
-        <div>Ha Noi</div>
+        <div></div>
         <div>1 ngày trước</div>
       </div>
     </div>

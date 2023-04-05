@@ -11,6 +11,12 @@ import "./Featured.scss";
 const Featured = () => {
   const [location, setLocation] = useState("All cities");
   const [open,setOpen] = useState(false)
+  const [search,setSearch] = useState('')
+  const handleSearch = () => {
+    window.location.href = `/jobs?search=${search}`;
+  };
+
+
   return (
     <div className="featured">
       <div className="container">
@@ -29,12 +35,12 @@ const Featured = () => {
           </div>
           <div className="searchInput">
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
           </div>
-          <Link to="/jobs" className="link">
+          
 
-          <button>Search</button>
-          </Link>
+          <button onClick={handleSearch}>Search</button>
+          
         </div>
         <div className="popular">
           <Link to="/" className="link">

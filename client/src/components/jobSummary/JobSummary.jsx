@@ -16,9 +16,9 @@ const JobSummary = () => {
       <h1>Frontend</h1>
       <div className="name">MB Bank</div>
       <div className="apply">
-        <Link to="/apply">
-          <button>Ứng tuyển</button>
-        </Link>
+        <button>
+          <Link to="/apply">Ứng tuyển</Link>
+        </button>
         <FontAwesomeIcon icon={faHeart} />
       </div>
       <div className="overview">

@@ -54,7 +54,9 @@ const Profile = () => {
       data.append("avatar", file);
       console.log(data);
       try {
-        await axios.post("http://localhost:8000/upload/uploadAvatar", data);
+        await axios.post("http://localhost:8000/upload/uploadAvatar",  data , {
+          withCredentials: true,
+        });
       } catch (err) {
         console.log(err);
       }

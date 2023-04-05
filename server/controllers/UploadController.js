@@ -3,8 +3,12 @@ const { CompanyModel } = require("../models/Company");
 const jwt = require("jsonwebtoken");
 
 const uploadAvatar = async (req, res) => {
+  console.log(req.cookies.session);
+   const session = JSON.parse(req.cookies.session);
+   const userId = session.user.userId;
+  //const userId = req.session.user.userId
   try {
-    const userId = req.session.user.userId;
+    
     const user = await UsersModel.findOne({ where: { userId } });
 
     if (!user) {

@@ -69,8 +69,6 @@ const searchJob = async (req, res) => {
       where: {
         [Op.or]: [
           { location: { [Op.iLike]: `%${prompt}%` } },
-          { skills: { [Op.overlap]: [prompt] } },
-          { title: { [Op.iLike]: `%${prompt}%` } },
         ],
       },
     });

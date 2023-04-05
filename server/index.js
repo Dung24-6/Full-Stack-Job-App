@@ -9,7 +9,11 @@ const MongoStore = require("connect-mongodb-session")(session);
 const router = require("./routes/index");
 require("dotenv").config();
 app.use(cookieParser());
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true
+};
+app.use(cors(corsOptions));
 mongoose.connect(process.env.DATABASE_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

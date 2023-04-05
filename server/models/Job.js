@@ -26,6 +26,10 @@ const JobsModel = db.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    skills: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     salary: {
       type: DataTypes.STRING(255),
       allowNull: true,
