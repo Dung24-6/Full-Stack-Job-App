@@ -6,9 +6,11 @@
   transition: all 0.5s ease;
   position: sticky;
   top: 0;
+  z-index: 10;
   &.active {
     height: 40px;
   }
+  
   
   .container {
     width: 1400px;
