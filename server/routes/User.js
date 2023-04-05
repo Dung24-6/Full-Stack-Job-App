@@ -18,4 +18,6 @@ router.post("/logout", UserController.logoutUser);
 
 router.post("/privateLogin", UserController.privateLogin);
 
+router.put("/updateUser", UserController.updateUser);
+
 module.exports = router;

@@ -3,26 +3,29 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const applyJob = async (req, res) => {
-  const cv = req.body;
+  const { userId, cv, companyEmail, jobId } = req.body;
+
   try {
     const jobApplication = new ApplicationModel({
       cv,
+      jobId,
+      userId,
     });
 
-    await ApplicationModel.save();
+    await jobApplication.save();
 
     // Send email notification to company
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "your_email@gmail.com",
-        pass: "your_password",
+        user: req.session.user.email,
+        pass: req.session.user.password,
       },
     });
 
     const mailOptions = {
-      from: "your_email@gmail.com",
-      to: "company_email@example.com",
+      from: req.session.user.email,
+      to: companyEmail,
       subject: "New job application submitted",
       text: `A new job application has been submitted for job posting $.`,
       attachments: [
