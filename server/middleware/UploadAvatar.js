@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const session = JSON.parse(req.cookies.session);
     const userId = session.user.userId;
-    cb(null, "avatar_" + userId + path.extname(file.originalname));
+    cb(null, "avatar_" + userId + '.png');
   },
 });
 

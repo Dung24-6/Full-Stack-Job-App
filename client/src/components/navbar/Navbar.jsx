@@ -62,7 +62,7 @@ const Navbar = () => {
             <>
               <div className="user" onClick={() => setOpen(!open)}>
                 <img
-                  src="https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                  src={currentUser.avatar_url.replace("..\\client\\public", "\\public")||"https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"}
                   alt=""
                 />
                 <span>{currentUser?.username}</span>

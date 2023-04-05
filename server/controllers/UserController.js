@@ -176,8 +176,9 @@ const deleteCV = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const  userId  = req.session.user.userId;
-  const { phone_number, address, skill, birth, sex, about } = req.body;
+  const session = JSON.parse(req.cookies.session);
+  const userId = session.user.userId;
+  const {username,email, phone_number, address, skill, birth, sex, about } = req.body;
 
   try {
     const user = await UsersModel.findOne({ where: { userId } });
@@ -186,6 +187,12 @@ const updateUser = async (req, res) => {
     }
 
     // update user information if provided
+    if (username) {
+      user.username = username;
+    }
+    if (email) {
+      user.email = email;
+    }
     if (phone_number) {
       user.phone_number = phone_number;
     }

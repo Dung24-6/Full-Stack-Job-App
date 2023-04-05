@@ -8,9 +8,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./Profile.scss";
+import { updateUser } from "../../redux/apiCalls";
 
 const Profile = () => {
   const currentUser = useSelector((state) => {
@@ -18,6 +19,7 @@ const Profile = () => {
       return state.user.currentUser.user;
     }
   });
+  const dispatch = useDispatch()
 
   const skills = [
     "html",
@@ -37,30 +39,45 @@ const Profile = () => {
   const [openEducation, setOpenEducation] = useState(false);
   const [openProject, setOpenProject] = useState(false);
 
-  const [name, setName] = useState(currentUser.username);
+  const [username, setUserName] = useState(currentUser.username);
   const [email, setEmail] = useState(currentUser.email);
-  const [phone, setPhone] = useState(currentUser.phone);
+  const [phone, setPhone] = useState(currentUser.phone_number);
   const [skillSearch, setSkillSearch] = useState("");
 
   const [mySkill, setMySkill] = useState([]);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(
+    currentUser.avatar_url.replace("..\\client\\public", "\\public")
+  );
 
   const [about, setAbout] = useState("");
 
   const handleSubmitUser = async () => {
-    if (file) {
+    if (file!==currentUser.avatar_url.replace("..\\client\\public", "\\public")) {
       const data = new FormData();
       data.append("avatar", file);
       console.log(data);
       try {
-        await axios.post("http://localhost:8000/upload/uploadAvatar",  data , {
+        await axios.post("http://localhost:8000/upload/uploadAvatar", data, {
           withCredentials: true,
         });
       } catch (err) {
         console.log(err);
       }
     }
+    const newUser = {
+      username:username,
+      email:email,
+      phone_number:phone,
+    };
+    // try {
+    //   await axios.put("http://localhost:8000/users/updateUser", newUser, {
+    //     withCredentials: true,
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    updateUser(dispatch,newUser)
     setOpenUser(false);
   };
   const handleDelete = (s) => {
@@ -75,13 +92,17 @@ const Profile = () => {
             <>
               <div className="userImg">
                 <img
-                  src="https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                  src={
+                    
+                      currentUser.avatar_url.replace("..\\client\\public", "\\public")
+                      ||"https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                  }
                   alt="avt"
                 />
               </div>
 
               <div className="info">
-                <h1>{name}</h1>
+                <h1>{username}</h1>
                 <hr />
                 <span>
                   <FontAwesomeIcon icon={faEnvelope} />
@@ -100,7 +121,11 @@ const Profile = () => {
             <>
               <div className="userImg">
                 <img
-                  src="https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                  src={
+                    file
+                      ? (file!==currentUser.avatar_url.replace("..\\client\\public", "\\public")?URL.createObjectURL(file):file)
+                      : "https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                  }
                   alt="avt"
                 />
                 <div className="edit">
@@ -112,7 +137,9 @@ const Profile = () => {
                     type="file"
                     id="avatar"
                     name="avatar"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) =>
+                      setFile(e.target.files[0])
+                    }
                     style={{ display: "none" }}
                   />
                 </div>
@@ -122,8 +149,8 @@ const Profile = () => {
                 <input
                   type="text"
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
                 <label htmlFor="email">Email:</label>
                 <input
