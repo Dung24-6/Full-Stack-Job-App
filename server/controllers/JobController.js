@@ -69,6 +69,9 @@ const searchJob = async (req, res) => {
       where: {
         [Op.or]: [
           { location: { [Op.iLike]: `%${prompt}%` } },
+          { skills: { [Op.iLike]: `%${prompt}%` } },
+          { title: { [Op.iLike]: `%${prompt}%` } },
+          { description: { [Op.iLike]: `%${prompt}%` } },
         ],
       },
     });
@@ -79,9 +82,41 @@ const searchJob = async (req, res) => {
   }
 };
 
+const searchJobById = async (req, res) => {
+  const { jobId } = req.params;
+  if (!jobId) {
+    return res.status(400).json("Job ID is missing");
+  }
+  try {
+    const job = await JobsModel.findByPk(jobId);
+    if (!job) {
+      return res.status(404).json("Job not found");
+    }
+    return res.status(200).json(job);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+const searchJobByCompany = async (req, res) => {
+  const { companyId } = req.query;
+  if (!companyId) {
+    return res.status(404).json("Choose a company ID");
+  }
+  try {
+    const jobs = await JobsModel.findAll({ where: { companyId } });
+    return res.status(200).json(jobs);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+
 module.exports = {
   createJob,
   searchJobByLocations,
   searchJobBySkill,
   searchJob,
+  searchJobById,
+  searchJobByCompany,
 };
