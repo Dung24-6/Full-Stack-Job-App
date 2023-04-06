@@ -1,34 +1,49 @@
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./JobCard.scss";
+import axios from "axios";
 
-const JobCard = () => {
+const JobCard = ({job}) => {
+  const [company,setCompany] = useState()
+  useEffect(()=>{
+    const getCompany = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/company/${job.companyId}`
+        );
+        setCompany(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getCompany();
+  },[])
+
+  
   return (
     <div className="jobCard">
       <div className="logo">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/2/25/Logo_MB_new.png"
+          src={company?company.logo_url:''}
           alt="logo"
         />
       </div>
       <div className="about">
-        <Link to="/job">
-          <h2></h2>
+        <Link to={`/job/${job.jobId}`}>
+          <h2>{job.title}</h2>
         </Link>
         <div className="sallary">
           <FontAwesomeIcon icon={faDollar} />
           2000
         </div>
         <div>Flexible time</div>
-        <div>Flexible time</div>
-        <div>Flexible time</div>
-        <div>Flexible time</div>
+        
       </div>
       <div className="more">
         <div className="hot">Hot</div>
-        <div></div>
+        <div>{job.location}</div>
         <div>1 ngày trước</div>
       </div>
     </div>

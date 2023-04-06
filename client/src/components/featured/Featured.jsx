@@ -13,7 +13,12 @@ const Featured = () => {
   const [open,setOpen] = useState(false)
   const [search,setSearch] = useState('')
   const handleSearch = () => {
-    window.location.href = `/jobs?search=${search}`;
+    window.location.href = `/jobs?prompt=${search}`;
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
   };
 
 
@@ -35,7 +40,7 @@ const Featured = () => {
           </div>
           <div className="searchInput">
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
+            <input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
           </div>
           
 

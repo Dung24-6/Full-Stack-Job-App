@@ -17,7 +17,7 @@ import axios from "axios";
 const Company = () => {
   const location = useLocation();
   const companyId = location.pathname.split("/")[2];
-  const [company, setCompany] = useState("");
+  const [company, setCompany] = useState('');
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const Company = () => {
         );
 
         setCompany(res.data);
+        console.log(company);
       } catch (error) {
         console.log(error);
       }
@@ -90,11 +91,11 @@ const Company = () => {
         </header>
         <div className="job">
           <ListJob>
-            <JobCard job={jobs} />
+            {/* <JobCard />
             <JobCard />
             <JobCard />
             <JobCard />
-            <JobCard />
+            <JobCard /> */}
           </ListJob>
           <JobSummary />
         </div>

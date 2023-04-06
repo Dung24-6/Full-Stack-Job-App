@@ -8,19 +8,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./AboutCompany.scss";
 
-const AboutCompany = () => {
+const AboutCompany = ({company}) => {
   return (
     <div className="aboutCompany">
-      <Link to="/company/MB-Bank">
+      <Link to={`/company/${company?company.companyId:2}`}>
         <div className="logo">
           <img
             className="logo-img"
-            src="https://upload.wikimedia.org/wikipedia/commons/2/25/Logo_MB_new.png"
+            src={company?company.logo_url:''}
             alt="logo"
           />
         </div>
       </Link>
-      <div className="name">MB Bank</div>
+      <div className="name">{company?company.name:''}</div>
       <div className="wrap-info">
         <div className="info">
           <FontAwesomeIcon icon={faGear} />
@@ -43,7 +43,7 @@ const AboutCompany = () => {
           Vietnam
         </div>
       </div>
-      <Link to="/company/:id">
+      <Link to={`/company/${company?company.companyId:2}`}>
         <button className="outline">About us</button>
       </Link>
     </div>
