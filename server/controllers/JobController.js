@@ -99,7 +99,7 @@ const searchJobById = async (req, res) => {
 };
 
 const searchJobByCompany = async (req, res) => {
-  const { companyId } = req.query;
+  const { companyId } = req.params;
   if (!companyId) {
     return res.status(404).json("Choose a company ID");
   }

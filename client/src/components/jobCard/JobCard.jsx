@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./JobCard.scss";
 import axios from "axios";
 
-const JobCard = ({job}) => {
+const JobCard = ({job,selected}) => {
   const [company,setCompany] = useState()
   useEffect(()=>{
     const getCompany = async () => {
@@ -23,7 +23,7 @@ const JobCard = ({job}) => {
 
   
   return (
-    <div className="jobCard">
+    <div className={selected?"jobCard action":"jobCard"} >
       <div className="logo">
         <img
           src={company?company.logo_url:''}

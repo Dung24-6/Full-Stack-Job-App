@@ -10,11 +10,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./JobSummary.scss";
 
-const JobSummary = () => {
+const JobSummary = ({job,company}) => {
   return (
     <div className="jobSummary">
-      <h1>Frontend</h1>
-      <div className="name">MB Bank</div>
+      <h1>{job?.title}</h1>
+      <div className="name">{company?.name}</div>
       <div className="apply">
         <button>
           <Link to="/apply">Ứng tuyển</Link>

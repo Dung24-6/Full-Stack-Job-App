@@ -53,7 +53,7 @@ function App() {
           element: <Profile />,
         },
         {
-          path: "/job",
+          path: "/job/:id",
           element: <Job />,
         },
         {

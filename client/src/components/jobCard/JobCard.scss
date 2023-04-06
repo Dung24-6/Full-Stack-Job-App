@@ -2,6 +2,9 @@
   width: 583px;
   margin-right: -5px;
   cursor: pointer;
+  &.action{
+    border-left: 5px solid var(--primary);
+  }
   &:hover {
     h2 {
       color: rgb(247, 36, 36);

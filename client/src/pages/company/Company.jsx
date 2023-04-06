@@ -17,8 +17,13 @@ import axios from "axios";
 const Company = () => {
   const location = useLocation();
   const companyId = location.pathname.split("/")[2];
-  const [company, setCompany] = useState('');
+  const [company, setCompany] = useState("");
   const [jobs, setJobs] = useState([]);
+  const [jobSelect, setJobSelect] = useState(0);
+
+  const handleJobClick = (id) => {
+    setJobSelect(id);
+  };
 
   useEffect(() => {
     const getCompany = async () => {
@@ -39,14 +44,25 @@ const Company = () => {
   useEffect(() => {
     const getJobs = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/jobs/${companyId}`);
+        const res = await axios.get(
+          `http://localhost:8000/job/searchJobByCompany/${companyId}`
+        );
         setJobs(res.data);
       } catch (error) {
         console.log(error);
       }
     };
-    getJobs();
-  }, []);
+    if (company) {
+      getJobs();
+    }
+    
+  }, [company]);
+  useEffect(()=>{
+    if (jobs) {
+      setJobSelect(jobs[0]?.jobId);
+      console.log(jobs[0]?.jobId);
+    }
+  },[jobs])
 
   return (
     <div className="company">
@@ -91,13 +107,13 @@ const Company = () => {
         </header>
         <div className="job">
           <ListJob>
-            {/* <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard /> */}
+            {jobs.map((job) => (
+              <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
+                <JobCard job={job} selected={job.jobId===jobSelect}/>
+              </div>
+            ))}
           </ListJob>
-          <JobSummary />
+          <JobSummary job={jobs.find(job=>job.jobId==jobSelect)} company={company} />
         </div>
       </div>
     </div>

@@ -8,8 +8,15 @@ import { useLocation } from "react-router-dom";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [company, setCompany] = useState("");
+
   const location = useLocation();
   const prompt = location.search;
+  const [jobSelect, setJobSelect] = useState(0);
+
+  const handleJobClick = (id) => {
+    setJobSelect(id);
+  };
   // useEffect(() => {
   //   const getJobs = async () => {
   //     try {
@@ -35,8 +42,33 @@ const Jobs = () => {
       }
     };
     getJobList();
-
   }, []);
+  useEffect(() => {
+    if (jobs) {
+      setJobSelect(jobs[0]?.jobId);
+      console.log(jobs[0]?.jobId);
+    }
+  }, [jobs]);
+  useEffect(() => {
+    let companyId;
+    const getCompany = async () => {
+      try {
+        // const res = await publicRequest.get(`company/${companyId}`);
+        const res = await axios.get(
+          `http://localhost:8000/company/${companyId}`
+        );
+
+        setCompany(res.data);
+        console.log(company);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (jobSelect) {
+      companyId = jobs.find((job) => job.jobId == jobSelect).companyId;
+      getCompany();
+    }
+  }, [jobSelect]);
 
   return (
     <div className="jobs">
@@ -44,11 +76,15 @@ const Jobs = () => {
         <div className="job">
           <ListJob>
             {jobs.map((job) => (
-              <JobCard key={job.jobId} job={job} />
+              <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
+                <JobCard job={job} selected={job.jobId === jobSelect} />
+              </div>
             ))}
-            
           </ListJob>
-          <JobSummary />
+          <JobSummary
+            job={jobs.find((job) => job.jobId == jobSelect)}
+            company={company}
+          />
         </div>
       </div>
     </div>
