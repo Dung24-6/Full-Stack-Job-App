@@ -18,7 +18,6 @@ const Job = () => {
           `http://localhost:8000/job/searchJobById/${jobId}`
         );
         setJob(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -32,7 +31,6 @@ const Job = () => {
           `http://localhost:8000/company/${job ? job.companyId : ""}`
         );
         setCompany(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error(error);
       }

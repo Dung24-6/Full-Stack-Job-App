@@ -56,7 +56,6 @@ const Profile = () => {
     if (file!==currentUser.avatar_url.replace("..\\client\\public", "\\public")) {
       const data = new FormData();
       data.append("avatar", file);
-      console.log(data);
       try {
         await axios.post("http://localhost:8000/upload/uploadAvatar", data, {
           withCredentials: true,
@@ -70,13 +69,7 @@ const Profile = () => {
       email:email,
       phone_number:phone,
     };
-    // try {
-    //   await axios.put("http://localhost:8000/users/updateUser", newUser, {
-    //     withCredentials: true,
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    
     updateUser(dispatch,newUser)
     setOpenUser(false);
   };

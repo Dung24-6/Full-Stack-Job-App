@@ -34,7 +34,6 @@ const Company = () => {
         );
 
         setCompany(res.data);
-        console.log(company);
       } catch (error) {
         console.log(error);
       }
@@ -60,7 +59,6 @@ const Company = () => {
   useEffect(()=>{
     if (jobs) {
       setJobSelect(jobs[0]?.jobId);
-      console.log(jobs[0]?.jobId);
     }
   },[jobs])
 

@@ -17,26 +17,22 @@ const Jobs = () => {
   const handleJobClick = (id) => {
     setJobSelect(id);
   };
-  // useEffect(() => {
-  //   const getJobs = async () => {
-  //     try {
-  //       const res = await axios.get(`http://localhost:8000/job/searchJob?prompt=H`);
-  //       setJobs(res.data)
-  //       console.log(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getJobs();
-
-  // }, []);
+  
   useEffect(() => {
     const getJobList = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/job/searchJob${prompt}`
-        );
-        setJobs(response.data);
+        if (prompt) {
+          
+          const response = await axios.get(
+            `http://localhost:8000/job/searchJob${prompt}`
+            );
+            setJobs(response.data);
+          } else{
+            const response = await axios.get(
+              `http://localhost:8000/job/searchAllJob`
+              );
+              setJobs(response.data);
+          }
       } catch (error) {
         console.error(error);
       }
@@ -46,7 +42,6 @@ const Jobs = () => {
   useEffect(() => {
     if (jobs) {
       setJobSelect(jobs[0]?.jobId);
-      console.log(jobs[0]?.jobId);
     }
   }, [jobs]);
   useEffect(() => {
@@ -59,7 +54,6 @@ const Jobs = () => {
         );
 
         setCompany(res.data);
-        console.log(company);
       } catch (error) {
         console.log(error);
       }
