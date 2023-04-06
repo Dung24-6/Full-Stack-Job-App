@@ -12,5 +12,7 @@ router.get("/searchJobById/:jobId", JobController.searchJobById);
 
 router.get("/searchJobByCompany/:companyId", JobController.searchJobByCompany);
 
+router.get("/searchAllJob", JobController.searchAllJob);
+
 
 module.exports = router;
