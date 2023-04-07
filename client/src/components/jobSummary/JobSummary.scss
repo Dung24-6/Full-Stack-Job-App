@@ -2,9 +2,17 @@
   background-color: #fff;
   flex: 1;
   padding: 30px;
+  padding-top: 0;
   border: 1px solid #d9d8d8;
   border-radius: 4px;
   width: 100%;
+  z-index: 1;
+  .header{
+    position: sticky;
+    top:0;
+    background-color: #fff;
+    padding-top: 30px;
+  }
 
   // scroll
   overflow-y: auto;

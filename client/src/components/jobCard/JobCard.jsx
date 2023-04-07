@@ -4,10 +4,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./JobCard.scss";
 import axios from "axios";
+import moment from "moment";
 
-const JobCard = ({job,selected}) => {
-  const [company,setCompany] = useState()
-  useEffect(()=>{
+const JobCard = ({ job, selected }) => {
+  const [company, setCompany] = useState();
+  
+  const formattedDate = moment(job.create_at).fromNow();
+  
+  
+  useEffect(() => {
     const getCompany = async () => {
       try {
         const response = await axios.get(
@@ -19,32 +24,27 @@ const JobCard = ({job,selected}) => {
       }
     };
     getCompany();
-  },[])
+  }, []);
 
-  
   return (
-    <div className={selected?"jobCard action":"jobCard"} >
+    <div className={selected ? "jobCard action" : "jobCard"}>
       <div className="logo">
-        <img
-          src={company?company.logo_url:''}
-          alt="logo"
-        />
+        <img src={company ? company.logo_url : ""} alt="logo" />
       </div>
       <div className="about">
-        <Link to={`/job/${job.jobId}`}>
-          <h2>{job.title}</h2>
-        </Link>
+        <h2>
+          <Link to={`/job/${job.jobId}`}>{job.title}</Link>
+        </h2>
         <div className="sallary">
           <FontAwesomeIcon icon={faDollar} />
-          2000
+          {job?.salary}
         </div>
         <div>Flexible time</div>
-        
       </div>
       <div className="more">
         <div className="hot">Hot</div>
         <div>{job.location}</div>
-        <div>1 ngày trước</div>
+        <div>{formattedDate==='a few seconds ago'?'1 hour ago':formattedDate}</div>
       </div>
     </div>
   );

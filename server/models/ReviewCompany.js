@@ -41,6 +41,10 @@ const ReviewCompanyModel = db.define(
       type: DataTypes.STRING(255),
       allowNull: true,
     },
+    title: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,

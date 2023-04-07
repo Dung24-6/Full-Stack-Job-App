@@ -1,13 +1,14 @@
-import React from 'react'
-import './ListJob.scss'
+import React from "react";
+import "./ListJob.scss";
 
-const ListJob = ({children}) => {
+const ListJob = ({ children }) => {
   return (
-    <nav className='listJob'>
-            <h1>Công việc</h1>
-            {children}
-        </nav>
-  )
-}
+    <nav className="listJob">
+      <h1>Công việc</h1>
 
-export default ListJob
+      {children}
+    </nav>
+  );
+};
+
+export default ListJob;

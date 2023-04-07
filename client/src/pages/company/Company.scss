@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
     header {
       background-color: #fff;
       border: 1px solid #d9d8d8;
@@ -45,6 +46,7 @@
           svg,
           img {
             margin-right: 5px;
+            width: 15px;
           }
         }
         .wrap-info {
@@ -72,11 +74,11 @@
             background-color: rgb(211, 5, 5);
           }
         }
-        .outline{
+        .outline {
           width: 180px;
           margin-top: 10px;
           color: var(--primary);
-          background-color: #fff ;
+          background-color: #fff;
           font-size: 18px;
           font-weight: 600;
           padding: 10px;
@@ -89,11 +91,80 @@
         }
       }
     }
+    .options {
+      display: flex;
+      width: 100%;
+      height: 50px;
+      background-color: #fff;
+      align-items: center;
+      gap: 10px;
+      .option {
+        font-size: 18px;
+        font-weight: 500;
+        height: 100%;
+        padding: 0 30px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        
+      }
+      .active {
+        color: var(--primary);
+        &::after {
+          content: "";
+          position: absolute;
+          height: 4px;
+          width: 100%;
+          background-color: var(--primary);
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
 
     .job {
       display: flex;
-      margin-top: 20px;
-      width: 1400px;
+      width: 100%;
+    }
+    .review{
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      .reviewList{
+        flex:3;
+        padding: 10px;
+        background-color: #fff;
+        .title{
+          padding: 20px;
+        }
+      }
+      .letWrite{
+        flex:1;
+        background-color: #fff;
+        height: 300px;
+        padding: 50px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        h2{
+          color: #434242;
+        }
+        .primary {
+          width: 100%;
+          margin-top: 10px;
+          color: #fff;
+          background-color: var(--primary);
+          font-size: 18px;
+          font-weight: 600;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(211, 5, 5);
+          }
+        }
+      }
     }
   }
 }

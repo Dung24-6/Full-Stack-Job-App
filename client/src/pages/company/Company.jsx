@@ -7,12 +7,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import "./Company.scss";
-import ListJob from "../../components/listJob/listJob";
-import JobCard from "../../components/jobCard/jobCard";
+import ListJob from "../../components/listJob/ListJob";
+import JobCard from "../../components/jobCard/JobCard";
 import JobSummary from "../../components/jobSummary/JobSummary";
-import { useLocation } from "react-router-dom";
-import { publicRequest } from "../../requestMethods";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import ReviewCard from "../../components/reviewCard/ReviewCard";
 
 const Company = () => {
   const location = useLocation();
@@ -20,6 +20,8 @@ const Company = () => {
   const [company, setCompany] = useState("");
   const [jobs, setJobs] = useState([]);
   const [jobSelect, setJobSelect] = useState(0);
+  const [option, setOption] = useState("Jobs");
+  const [reviews, setReviews] = useState([]);
 
   const handleJobClick = (id) => {
     setJobSelect(id);
@@ -28,7 +30,6 @@ const Company = () => {
   useEffect(() => {
     const getCompany = async () => {
       try {
-        // const res = await publicRequest.get(`company/${companyId}`);
         const res = await axios.get(
           `http://localhost:8000/company/${companyId}`
         );
@@ -54,13 +55,27 @@ const Company = () => {
     if (company) {
       getJobs();
     }
-    
   }, [company]);
-  useEffect(()=>{
+  useEffect(() => {
+    const getReviews = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/review/reviews/${companyId}`
+        );
+        setReviews(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (company) {
+      getReviews();
+    }
+  }, [company]);
+  useEffect(() => {
     if (jobs) {
       setJobSelect(jobs[0]?.jobId);
     }
-  },[jobs])
+  }, [jobs]);
 
   return (
     <div className="company">
@@ -73,7 +88,7 @@ const Company = () => {
             <h1>{company.name}</h1>
             <div className="info">
               <FontAwesomeIcon icon={faLocationDot} />
-              {company.location}
+              {company.address}
             </div>
             <div className="wrap-info">
               <div className="info">
@@ -99,20 +114,57 @@ const Company = () => {
             </div>
           </div>
           <div className="header-btn">
-            <button className="primary">Viết đánh giá</button>
+            <button className="primary">
+              <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
+            </button>
             <button className="outline">Theo dõi</button>
           </div>
         </header>
-        <div className="job">
-          <ListJob>
-            {jobs.map((job) => (
-              <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
-                <JobCard job={job} selected={job.jobId===jobSelect}/>
-              </div>
-            ))}
-          </ListJob>
-          <JobSummary job={jobs.find(job=>job.jobId==jobSelect)} company={company} />
+        <div className="options">
+          <span
+            className={option === "Jobs" ? "option active" : "option"}
+            onClick={() => setOption("Jobs")}
+          >
+            Tuyển dụng
+          </span>
+          <span
+            className={option === "Reviews" ? "option active" : "option"}
+            onClick={() => setOption("Reviews")}
+          >
+            Đánh giá
+          </span>
         </div>
+        {option === "Jobs" ? (
+          <div className="job">
+            <ListJob>
+              {jobs.map((job) => (
+                <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
+                  <JobCard job={job} selected={job.jobId === jobSelect} />
+                </div>
+              ))}
+            </ListJob>
+            <JobSummary
+              job={jobs.find((job) => job.jobId == jobSelect)}
+              company={company}
+            />
+          </div>
+        ) : (
+          <div className="review">
+            <div className="reviewList">
+              <h2 className="title">Đánh giá</h2>
+              {reviews.map((review) => (
+                <ReviewCard key={review.reviewId} review={review} />
+              ))}
+            </div>
+            <div className="letWrite">
+              <h2>Let your voice be heard.</h2>
+              <span>Review {company.name} now</span>
+              <button className="primary">
+                <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

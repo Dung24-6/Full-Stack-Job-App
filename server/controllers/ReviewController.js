@@ -15,8 +15,12 @@ const getReviewsByCompanyId = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-  const { companyId, rating, comment } = req.body;
-  if (!(companyId && rating && comment)) {
+  const session = JSON.parse(req.cookies.session);
+  const userId = session.user.userId;
+  //const userId = req.session.user.userId;
+  const { companyId } = req.params;
+  const { rating, comment, title } = req.body;
+  if (!(companyId && rating && title && comment && userId)) {
     return res.status(400).json("Not enough params");
   }
   try {
@@ -27,9 +31,11 @@ const createReview = async (req, res) => {
       return res.status(400).json("Invalid company id");
     }
     const review = await ReviewCompanyModel.create({
+      userId: userId,
       companyId: companyId,
       rating: rating,
       comment: comment,
+      title: title,
     });
     return res.status(200).json(review);
   } catch (err) {

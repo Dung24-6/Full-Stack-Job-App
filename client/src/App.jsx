@@ -12,6 +12,7 @@ import Job from "./pages/job/Job";
 import Jobs from "./pages/jobs/Jobs";
 import Companies from "./pages/companies/Companies";
 import ApplyJob from "./pages/applyJob/applyJob";
+import Review from "./pages/review/Review";
 
 function App() {
   const Layout = () => {
@@ -63,6 +64,10 @@ function App() {
         {
           path: "/apply",
           element: <ApplyJob />,
+        },
+        {
+          path: "/review/:companyId",
+          element: <Review />,
         },
       ],
     },

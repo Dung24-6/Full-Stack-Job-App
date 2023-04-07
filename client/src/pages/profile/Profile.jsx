@@ -19,7 +19,7 @@ const Profile = () => {
       return state.user.currentUser.user;
     }
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const skills = [
     "html",
@@ -30,12 +30,21 @@ const Profile = () => {
     "php",
     "express",
     "java",
+    "python",
+    "C++",
+    "ruby",
+    "typeScript",
+    "swift",
+    "go",
+    "kotlin",
+    "C#",
+    "SQL",
   ];
 
   const [openUser, setOpenUser] = useState(false);
   const [openAbout, setOpenAbout] = useState(false);
-  const [openWork, setOpenWork] = useState(false);
   const [openSkills, setOpenSkills] = useState(false);
+  const [openWork, setOpenWork] = useState(false);
   const [openEducation, setOpenEducation] = useState(false);
   const [openProject, setOpenProject] = useState(false);
 
@@ -50,10 +59,12 @@ const Profile = () => {
     currentUser.avatar_url.replace("..\\client\\public", "\\public")
   );
 
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState(currentUser.about);
 
   const handleSubmitUser = async () => {
-    if (file!==currentUser.avatar_url.replace("..\\client\\public", "\\public")) {
+    if (
+      file !== currentUser.avatar_url.replace("..\\client\\public", "\\public")
+    ) {
       const data = new FormData();
       data.append("avatar", file);
       try {
@@ -65,14 +76,34 @@ const Profile = () => {
       }
     }
     const newUser = {
-      username:username,
-      email:email,
-      phone_number:phone,
+      username: username,
+      email: email,
+      phone_number: phone,
     };
-    
-    updateUser(dispatch,newUser)
+
+    updateUser(dispatch, newUser);
     setOpenUser(false);
   };
+  const handleResetUser = () =>{
+    setUserName(currentUser.username)
+    setEmail(currentUser.email)
+    setPhone(currentUser.phone_number)
+    setOpenUser(false);
+
+  }
+  const handleSubmitAbout = async () => {
+    const newUser = {
+      about: about,
+    };
+
+    updateUser(dispatch, newUser);
+    setOpenAbout(false);
+  };
+  const handleResetAbout = () =>{
+    setAbout(currentUser.about)
+    setOpenAbout(false);
+
+  }
   const handleDelete = (s) => {
     const newSkill = mySkill.filter((item) => item != s);
     setMySkill(newSkill);
@@ -86,24 +117,26 @@ const Profile = () => {
               <div className="userImg">
                 <img
                   src={
-                    
-                      currentUser.avatar_url.replace("..\\client\\public", "\\public")
-                      ||"https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
+                    currentUser.avatar_url.replace(
+                      "..\\client\\public",
+                      "\\public"
+                    ) ||
+                    "https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
                   }
                   alt="avt"
                 />
               </div>
 
               <div className="info">
-                <h1>{username}</h1>
+                <h1>{currentUser.username}</h1>
                 <hr />
                 <span>
                   <FontAwesomeIcon icon={faEnvelope} />
-                  {email}
+                  {currentUser.email}
                 </span>
                 <span>
                   <FontAwesomeIcon icon={faPhone} />
-                  {phone}
+                  {currentUser.phone_number}
                 </span>
               </div>
               <div className="modify" onClick={() => setOpenUser(true)}>
@@ -116,7 +149,13 @@ const Profile = () => {
                 <img
                   src={
                     file
-                      ? (file!==currentUser.avatar_url.replace("..\\client\\public", "\\public")?URL.createObjectURL(file):file)
+                      ? file !==
+                        currentUser.avatar_url.replace(
+                          "..\\client\\public",
+                          "\\public"
+                        )
+                        ? URL.createObjectURL(file)
+                        : file
                       : "https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
                   }
                   alt="avt"
@@ -130,9 +169,7 @@ const Profile = () => {
                     type="file"
                     id="avatar"
                     name="avatar"
-                    onChange={(e) =>
-                      setFile(e.target.files[0])
-                    }
+                    onChange={(e) => setFile(e.target.files[0])}
                     style={{ display: "none" }}
                   />
                 </div>
@@ -165,7 +202,7 @@ const Profile = () => {
                 <button className="primary" onClick={handleSubmitUser}>
                   Save
                 </button>
-                <button className="outline">Discard</button>
+                <button className="outline" onClick={handleResetUser}>Discard</button>
               </div>
             </>
           )}
@@ -194,15 +231,15 @@ const Profile = () => {
               />
 
               <div className="actions">
-                <button className="primary" onClick={() => setOpenAbout(false)}>
+                <button className="primary" onClick={handleSubmitAbout}>
                   Save
                 </button>
-                <button className="outline">Discard</button>
+                <button className="outline" onClick={handleResetAbout}>Discard</button>
               </div>
             </>
           )}
         </div>
-        <div className="info-item">
+        {/* <div className="info-item">
           <h2>Work Experience</h2>
 
           {!openWork ? (
@@ -217,7 +254,7 @@ const Profile = () => {
               <button className="outline">Discard</button>
             </div>
           )}
-        </div>
+        </div> */}
         <div className="info-item">
           <h2>Skills</h2>
           {!openSkills ? (
@@ -287,7 +324,7 @@ const Profile = () => {
           )}
         </div>
 
-        <div className="info-item">
+        {/* <div className="info-item">
           <h2>Education</h2>
 
           {!openEducation ? (
@@ -321,7 +358,7 @@ const Profile = () => {
               <button className="outline">Discard</button>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
