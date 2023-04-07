@@ -33,7 +33,7 @@ const JobSummary = ({job,company}) => {
         </div>
         <div className="overview-item">
           <FontAwesomeIcon icon={faLocationDot} />
-          {company.address}
+          {company?.address}
         </div>
         <div className="overview-item">
           <FontAwesomeIcon icon={faUserAlt} />

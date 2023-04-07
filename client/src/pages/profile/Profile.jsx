@@ -52,8 +52,7 @@ const Profile = () => {
   const [email, setEmail] = useState(currentUser.email);
   const [phone, setPhone] = useState(currentUser.phone_number);
   const [skillSearch, setSkillSearch] = useState("");
-
-  const [mySkill, setMySkill] = useState([]);
+  const [mySkill, setMySkill] = useState(currentUser.skill.split(","));
 
   const [file, setFile] = useState(
     currentUser.avatar_url.replace("..\\client\\public", "\\public")
@@ -84,13 +83,12 @@ const Profile = () => {
     updateUser(dispatch, newUser);
     setOpenUser(false);
   };
-  const handleResetUser = () =>{
-    setUserName(currentUser.username)
-    setEmail(currentUser.email)
-    setPhone(currentUser.phone_number)
+  const handleResetUser = () => {
+    setUserName(currentUser.username);
+    setEmail(currentUser.email);
+    setPhone(currentUser.phone_number);
     setOpenUser(false);
-
-  }
+  };
   const handleSubmitAbout = async () => {
     const newUser = {
       about: about,
@@ -99,11 +97,24 @@ const Profile = () => {
     updateUser(dispatch, newUser);
     setOpenAbout(false);
   };
-  const handleResetAbout = () =>{
-    setAbout(currentUser.about)
+  const handleResetAbout = () => {
+    setAbout(currentUser.about);
     setOpenAbout(false);
+  };
+  const handleSubmitSkill = async () => {
+    const newUser = {
+      skill: mySkill.join(','),
+    };
 
-  }
+    updateUser(dispatch, newUser);
+    setOpenSkills(false);
+    setSkillSearch("");
+  };
+  const handleResetSkill = () => {
+    setMySkill(currentUser.skill.split(","));
+    setOpenSkills(false);
+    setSkillSearch("");
+  };
   const handleDelete = (s) => {
     const newSkill = mySkill.filter((item) => item != s);
     setMySkill(newSkill);
@@ -202,7 +213,9 @@ const Profile = () => {
                 <button className="primary" onClick={handleSubmitUser}>
                   Save
                 </button>
-                <button className="outline" onClick={handleResetUser}>Discard</button>
+                <button className="outline" onClick={handleResetUser}>
+                  Discard
+                </button>
               </div>
             </>
           )}
@@ -234,7 +247,9 @@ const Profile = () => {
                 <button className="primary" onClick={handleSubmitAbout}>
                   Save
                 </button>
-                <button className="outline" onClick={handleResetAbout}>Discard</button>
+                <button className="outline" onClick={handleResetAbout}>
+                  Discard
+                </button>
               </div>
             </>
           )}
@@ -303,22 +318,20 @@ const Profile = () => {
                   .map((skill) => (
                     <span
                       key={skill}
-                      onClick={() => setMySkill((prev) => [...prev, skill])}
+                      onClick={() => {
+                        setMySkill((prev) => [...prev, skill]);
+                      }}
                     >
                       {skill}
                     </span>
                   ))}
               <div className="actions">
-                <button
-                  className="primary"
-                  onClick={() => {
-                    setOpenSkills(false);
-                    setSkillSearch("");
-                  }}
-                >
+                <button className="primary" onClick={handleSubmitSkill}>
                   Save
                 </button>
-                <button className="outline">Discard</button>
+                <button className="outline" onClick={handleResetSkill}>
+                  Discard
+                </button>
               </div>
             </>
           )}
