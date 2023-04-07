@@ -132,7 +132,7 @@ const loginCompany = async (req, res) => {
     res.locals.company = req.session.company;
     console.log(req.session.company);
     return res.json({
-      message: "Login ok",
+      company,
       token: req.session.company,
     });
   } catch (err) {

@@ -1,0 +1,85 @@
+.createJob {
+    display: flex;
+    justify-content: center;
+    .container {
+      width: 1000px;
+      margin: 20px;
+      background-color: #fff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      header {
+        display: flex;
+        justify-content: space-between;
+        .about{
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          color: #484646;
+          svg{
+            width: 40px;
+          }
+        }
+        h1 {
+          color: #484646;
+          font-weight: 500;
+          font-size: 40px;
+        }
+        img {
+          width: 150px;
+          height: 150px;
+          object-fit: contain;
+        }
+      }
+      span {
+        font-size: 16px;
+      }
+      h3 {
+        font-size: 18px;
+        svg{
+          color: #119737;
+          margin-left: 10px;
+        }
+      }
+      .rating {
+        font-size: 30px;
+        color: #d0cdcd;
+        svg{
+          cursor: pointer;
+        }
+        .blue{
+        color: #091e8b;
+  
+        }
+      }
+      .title{
+        font-size: 20px;
+        font-weight: 500;
+      }
+      input {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #484646;
+        border-radius: 5px;
+      }
+      textarea {
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+      }
+      button {
+        padding: 20px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 500;
+        color: #fff;
+        background-color: var(--primary);
+        border-radius: 5px;
+      }
+    }
+  }
+  
