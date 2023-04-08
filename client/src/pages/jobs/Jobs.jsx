@@ -30,7 +30,7 @@ const Jobs = () => {
   useEffect(() => {
     const getJobList = async () => {
       try {
-        if (prompt) {
+        if (prompt&&prompt.length>8) {
           const response = await axios.get(
             `http://localhost:8000/job/searchJob${prompt}`
           );
@@ -46,7 +46,7 @@ const Jobs = () => {
       }
     };
     getJobList();
-  }, []);
+  }, [location]);
   useEffect(() => {
     if (jobsFiltered) {
       setJobSelect(jobsFiltered[0]?.jobId);
@@ -94,22 +94,26 @@ const Jobs = () => {
         <div className="filterList">
           <Filter name="location" data={locationData} onChange={setFilter} />
           <Filter name="salary" data={salaryData} onChange={setFilter} />
-          <button>
+          {/* <button>
             <FontAwesomeIcon icon={faFilter} />
-          </button>
+          </button> */}
         </div>
         <div className="job">
-          <ListJob>
-            {jobsFiltered.map((job) => (
-              <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
-                <JobCard job={job} selected={job.jobId === jobSelect} />
-              </div>
-            ))}
-          </ListJob>
-          <JobSummary
-            job={jobs.find((job) => job.jobId == jobSelect)}
-            company={company}
-          />
+          {/* {jobsFiltered.length!==0? */}
+          <>
+            <ListJob>
+              {jobsFiltered.map((job) => (
+                <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
+                  <JobCard job={job} selected={job.jobId === jobSelect} />
+                </div>
+              ))}
+            </ListJob>
+            <JobSummary
+              job={jobs.find((job) => job.jobId == jobSelect)}
+              company={company}
+            />
+          </>
+        {/* :<h1 style={{height:'700px'}}>Can not Find Any Job</h1>} */}
         </div>
       </div>
     </div>

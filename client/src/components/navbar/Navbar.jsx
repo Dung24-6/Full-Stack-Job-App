@@ -75,7 +75,7 @@ const Navbar = () => {
                 <img
                   src={
                     currentUser
-                      ? currentUser.avatar_url.replace(
+                      ? currentUser.avatar_url?.replace(
                           "..\\client\\public",
                           "\\public"
                         )

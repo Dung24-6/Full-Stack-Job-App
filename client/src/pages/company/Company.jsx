@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import "./Company.scss";
 import ListJob from "../../components/listJob/ListJob";
-import JobCard from "../../components/jobCard/JobCard";
 import JobSummary from "../../components/jobSummary/JobSummary";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
+import JobCard from "../../components/jobCard/jobCard";
 
 const Company = () => {
   const location = useLocation();

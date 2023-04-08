@@ -1,6 +1,7 @@
 .jobs {
     display: flex;
     justify-content: center;
+
     .container {
       width: 1400px;
       display: flex;
@@ -28,7 +29,7 @@
       .job {
         display: flex;
         margin-top: 20px;
-        width: 1400px;
+        width: 100%;
       }
     }
   }

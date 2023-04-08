@@ -98,6 +98,8 @@
       background-color: #fff;
       align-items: center;
       gap: 10px;
+      border: 1px solid #d9d8d8;
+      border-radius: 4px;
       .option {
         font-size: 18px;
         font-weight: 500;
@@ -107,7 +109,6 @@
         align-items: center;
         position: relative;
         cursor: pointer;
-        
       }
       .active {
         color: var(--primary);
@@ -127,27 +128,32 @@
       display: flex;
       width: 100%;
     }
-    .review{
+    .review {
       display: flex;
       gap: 10px;
       width: 100%;
-      .reviewList{
-        flex:3;
+      
+      .reviewList {
+        flex: 3;
         padding: 10px;
         background-color: #fff;
-        .title{
+        border: 1px solid #d9d8d8;
+      border-radius: 4px;
+        .title {
           padding: 20px;
         }
       }
-      .letWrite{
-        flex:1;
+      .letWrite {
+        flex: 1;
         background-color: #fff;
         height: 300px;
         padding: 50px 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        h2{
+        border: 1px solid #d9d8d8;
+        border-radius: 4px;
+        h2 {
           color: #434242;
         }
         .primary {

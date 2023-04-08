@@ -52,17 +52,17 @@ const Profile = () => {
   const [email, setEmail] = useState(currentUser.email);
   const [phone, setPhone] = useState(currentUser.phone_number);
   const [skillSearch, setSkillSearch] = useState("");
-  const [mySkill, setMySkill] = useState(currentUser.skill.split(","));
+  const [mySkill, setMySkill] = useState(currentUser.skill?.split(","));
 
   const [file, setFile] = useState(
-    currentUser.avatar_url.replace("..\\client\\public", "\\public")
+    currentUser.avatar_url?.replace("..\\client\\public", "\\public")
   );
 
   const [about, setAbout] = useState(currentUser.about);
 
   const handleSubmitUser = async () => {
     if (
-      file !== currentUser.avatar_url.replace("..\\client\\public", "\\public")
+      file !== currentUser.avatar_url?.replace("..\\client\\public", "\\public")
     ) {
       const data = new FormData();
       data.append("avatar", file);
@@ -111,7 +111,7 @@ const Profile = () => {
     setSkillSearch("");
   };
   const handleResetSkill = () => {
-    setMySkill(currentUser.skill.split(","));
+    setMySkill(currentUser.skill?.split(","));
     setOpenSkills(false);
     setSkillSearch("");
   };
@@ -128,7 +128,7 @@ const Profile = () => {
               <div className="userImg">
                 <img
                   src={
-                    currentUser.avatar_url.replace(
+                    currentUser.avatar_url?.replace(
                       "..\\client\\public",
                       "\\public"
                     ) ||
@@ -161,7 +161,7 @@ const Profile = () => {
                   src={
                     file
                       ? file !==
-                        currentUser.avatar_url.replace(
+                        currentUser.avatar_url?.replace(
                           "..\\client\\public",
                           "\\public"
                         )
