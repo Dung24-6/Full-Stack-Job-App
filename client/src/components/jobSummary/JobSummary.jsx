@@ -5,14 +5,17 @@ import {
   faLocationDot,
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./JobSummary.scss";
 import moment from "moment";
 
-const JobSummary = ({job,company}) => {
+const JobSummary = ({ job, company }) => {
   const formattedDate = moment(job?.create_at).fromNow();
+  const [heart, setHeart] = useState(false);
 
   return (
     <div className="jobSummary">
@@ -21,9 +24,17 @@ const JobSummary = ({job,company}) => {
         <div className="name">{company?.name}</div>
         <div className="apply">
           <button>
-            <Link to="/apply">Ứng tuyển</Link>
+            <Link to={`/apply/${job?.jobId}`}>Ứng tuyển</Link>
           </button>
-          <FontAwesomeIcon icon={faHeart} />
+          {heart ? (
+            <FontAwesomeIcon icon={faHeart} onClick={() => setHeart(false)} />
+          ) : (
+            <FontAwesomeIcon
+              icon={faHeartOutline}
+              style={{ color: "#000" }}
+              onClick={() => setHeart(true)}
+            />
+          )}
         </div>
       </div>
       <div className="overview">
@@ -41,18 +52,13 @@ const JobSummary = ({job,company}) => {
         </div>
         <div className="overview-item time">
           <FontAwesomeIcon icon={faCalendar} />
-          {formattedDate==='a few seconds ago'?'1 hour ago':formattedDate}
+          {formattedDate === "a few seconds ago" ? "1 hour ago" : formattedDate}
         </div>
       </div>
       <h2>Mô Tả Công Việc</h2>
-      <p>
-        {job?.description}
-      </p>
+      <p>{job?.description}</p>
       <h2>Yêu Cầu Công Việc</h2>
-      <p>
-        {job?.requirement}
-      </p>
-      
+      <p>{job?.requirement}</p>
     </div>
   );
 };

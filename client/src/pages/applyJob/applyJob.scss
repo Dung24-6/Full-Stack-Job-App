@@ -1,44 +1,100 @@
 .applyJob {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .form {
+  justify-content: center;
+  .container {
+    width: 1000px;
+    margin: 20px;
+    background-color: #fff;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+    gap: 20px;
 
-    label {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    input[type="file"] {
-      margin-bottom: 20px;
-    }
-
-    button[type="submit"] {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        background-color: #0062cc;
+    header {
+      display: flex;
+      justify-content: space-between;
+      .about {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        color: #484646;
+        svg {
+          width: 40px;
+        }
       }
+      h1 {
+        color: #484646;
+        font-weight: 500;
+        font-size: 40px;
+      }
+      img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+      }
+    }
+    h2 {
+      color: #2e2d2d;
+    }
+    span {
+      font-size: 16px;
+    }
+    h3 {
+      font-size: 18px;
+      svg {
+        color: #119737;
+        margin-left: 10px;
+      }
+    }
+    .uploadCV {
+      font-size: 16px;
+      label {
+        color: #091e8b;
+        cursor: pointer;
+      }
+      .sentCV {
+        color: #178636;
+      }
+      svg {
+        font-size: 26px;
+        margin-right: 10px;
+      }
+    }
+    .rating {
+      font-size: 30px;
+      color: #d0cdcd;
+      svg {
+        cursor: pointer;
+      }
+      .blue {
+        color: #091e8b;
+      }
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    input {
+      font-size: 14px;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #484646;
+      border-radius: 5px;
+    }
+    textarea {
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+    }
+    button {
+      padding: 20px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      background-color: var(--primary);
+      border-radius: 5px;
     }
   }
 }

@@ -64,7 +64,7 @@ function App() {
           element: <Jobs />,
         },
         {
-          path: "/apply",
+          path: "/apply/:jobId",
           element: <ApplyJob />,
         },
         {
