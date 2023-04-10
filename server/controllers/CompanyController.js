@@ -86,10 +86,12 @@ const registerCompany = async (req, res) => {
     if (exitingCompany) {
       res.status(500).json("Email already in use");
     } else {
+      const salt = await bcrypt.genSalt(10); // tạo salt để hash password
+      const hashedPassword = await bcrypt.hash(password, salt); // hash password
       const company = await CompanyModel.create({
         name,
         email,
-        password,
+        password: hashedPassword, // lưu hashed password vào database thay vì plaintext password
       });
       return res.json(company);
     }
@@ -125,11 +127,13 @@ const loginCompany = async (req, res) => {
     if (!company) {
       return res.status(400).json("Email incorrect");
     }
-    if (password !== company.password) {
+    const isPasswordValid = await bcrypt.compare(password, company.password); // so sánh hashed password trong database với password người dùng nhập vào
+    if (!isPasswordValid) {
       return res.status(400).json("Password incorrect");
     }
     req.session.company = { companyId: company.companyId };
     res.locals.company = req.session.company;
+    await req.session.save();
     console.log(req.session.company);
     return res.json({
       company,

@@ -38,7 +38,7 @@ const ReviewCompanyModel = db.define(
       defaultValue: 0,
     },
     comment: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(600),
       allowNull: true,
     },
     title: {

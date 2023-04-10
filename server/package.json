@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Dung24-6/Full-Stack-Job-App#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "connect-mongo": "^5.0.0",
     "connect-mongodb-session": "^3.1.1",

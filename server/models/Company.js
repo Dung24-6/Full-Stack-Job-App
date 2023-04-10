@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/config");
 const { JobsModel } = require("./Job");
-const { ReviewCompanyModel } = require("./ReviewCompany")
+const { ReviewCompanyModel } = require("./ReviewCompany");
 
 const CompanyModel = db.define(
   "company",
@@ -46,7 +46,7 @@ const CompanyModel = db.define(
       allowNull: true,
     },
     description: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(600),
       allowNull: true,
     },
     created_at: {

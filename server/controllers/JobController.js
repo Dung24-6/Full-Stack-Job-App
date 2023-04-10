@@ -119,14 +119,13 @@ const searchJobByCompany = async (req, res) => {
 const searchAllJob = async (req, res) => {
   try {
     const jobs = await JobsModel.findAll({
-     // order: Op.literal("random()"), // order randomly
+      order: Sequelize.fn("RANDOM"), // order randomly
     });
     return res.status(200).json(jobs);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
 };
-
 
 module.exports = {
   createJob,
