@@ -1,16 +1,16 @@
 const { ApplicationModel } = require("../models/Application");
 const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const applyJob = async (req, res) => {
-  const {  cv, companyEmail, jobId } = req.body;
-  const userId  = req.session.user.userId;
+  const { jobId , description } = req.body;
+  const userId = req.session.user.userId;
 
   try {
     const jobApplication = new ApplicationModel({
-      cv,
       jobId,
       userId,
+      description,
     });
 
     await jobApplication.save();
@@ -19,22 +19,16 @@ const applyJob = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: req.session.user.email,
-        pass: req.session.user.password,
+        user: "hadung24062002@gmail.com",
+        pass: process.env.MAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: req.session.user.email,
-      to: companyEmail,
+      from: "hadung24062002@gmail.com",
+      to: "hadung24062002@gmail.com",
       subject: "New job application submitted",
-      text: `A new job application has been submitted for job posting $.`,
-      attachments: [
-        {
-          filename: cv.name,
-          content: cv.data,
-        },
-      ],
+      text: "This is a test email",
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
