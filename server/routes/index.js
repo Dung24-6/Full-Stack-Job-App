@@ -5,6 +5,7 @@ const jobRouter = require("./Job");
 const applicationRouter = require("./Application");
 const uploadRouter = require("./Upload");
 const reviewRouter = require("./Review");
+const reportRouter = require("./Report");
 
 router.use("/users", userRouter);
 router.use("/company", companyRouter);
@@ -12,4 +13,5 @@ router.use("/job", jobRouter);
 router.use("/application", applicationRouter);
 router.use("/upload", uploadRouter);
 router.use("/review",reviewRouter);
+router.use("/report", reportRouter);
 module.exports = router;
