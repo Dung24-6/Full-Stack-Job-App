@@ -9,6 +9,7 @@ import {
   faFileArrowUp,
   faFileCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
+import { publicRequest } from "../../requestMethods";
 
 const ApplyJob = () => {
   const location = useLocation();
@@ -42,7 +43,7 @@ const ApplyJob = () => {
     const getCompany = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/company/${job ? job.companyId : ""}`
+          `http://localhost:8000/company/${job?.companyId}`
         );
         setCompany(response.data);
       } catch (error) {
@@ -53,6 +54,19 @@ const ApplyJob = () => {
       getCompany();
     }
   }, [job]);
+
+  const handleSubmit = async () => {
+    const data = new FormData();
+    data.append("cv", file);
+    try {
+      const resApp = await publicRequest.post('application', { jobId, reason })
+      const resCV = await publicRequest.post('upload/uploadCV', data)
+      console.log(resApp)
+      console.log(resCV)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="applyJob">
@@ -102,7 +116,7 @@ const ApplyJob = () => {
           placeholder="Why?"
           onChange={(e) => setReason(e.target.value)}
         ></textarea>
-        <button>Send my CV</button>
+        <button onClick={handleSubmit}>Send my CV</button>
       </div>
     </div>
   );
