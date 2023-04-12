@@ -116,6 +116,9 @@ const Navbar = () => {
                 <span>{currentCompany?.name}</span>
                 {open && (
                   <div className="options">
+                  <Link to={`/company/${currentCompany.companyId}`} className="link" >
+                      My Company
+                    </Link>
                     
                     
                     <Link to="/loginCompany" className="link" onClick={handleLogoutCompany}>

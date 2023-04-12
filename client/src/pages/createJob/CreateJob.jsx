@@ -16,28 +16,32 @@ const CreateJob = () => {
     }
   });
 
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [salary, setSalary] = useState("");
   const [requirement, setRequirement] = useState("");
   const [description, setDescription] = useState("");
 
-
-
-  const handleSubmit = async()=> {
-    const newJob ={
-      title,salary,requirement,description
-    }
+  const handleSubmit = async () => {
+    console.log(requirement);
+    const newJob = {
+      title,
+      salary,
+      requirement,
+      description,
+    };
     try {
-       const res = await axios.post(`http://localhost:8000/job/createJob`,newJob,{
-        withCredentials: true,
-      })
-      console.log(res.data);
+      const res = await axios.post(
+        `http://localhost:8000/job/createJob`,
+        newJob,
+        {
+          withCredentials: true,
+        }
+      );
       window.location.href = `/job/${res.data.jobId}`;
-
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div className="createJob">
       <div className="container">
@@ -56,12 +60,21 @@ const CreateJob = () => {
           <img src={company.logo_url} alt="" />
         </header>
         <h3>Title</h3>
-        <input className="title" type="text" placeholder="Title" onChange={(e)=>setTitle(e.target.value)}/>
+        <input
+          className="title"
+          type="text"
+          placeholder="Title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <h3>
           Salary
           <FontAwesomeIcon icon={faDollar} />
         </h3>
-        <input type="text" placeholder="Salary" onChange={(e)=>setSalary(e.target.value)}/>
+        <input
+          type="text"
+          placeholder="Salary"
+          onChange={(e) => setSalary(e.target.value)}
+        />
 
         <h3>Requirement</h3>
         <textarea
@@ -70,7 +83,7 @@ const CreateJob = () => {
           cols="30"
           rows="10"
           placeholder="Requirement"
-          onChange={(e)=>setRequirement(e.target.value)}
+          onChange={(e) => setRequirement(e.target.value)}
         ></textarea>
         <h3>Description</h3>
         <textarea
@@ -79,9 +92,11 @@ const CreateJob = () => {
           cols="30"
           rows="10"
           placeholder="Description"
-          onChange={(e)=>setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         ></textarea>
-        <button className="primany" onClick={handleSubmit}>Create Job</button>
+        <button className="primany" onClick={handleSubmit}>
+          Create Job
+        </button>
       </div>
     </div>
   );

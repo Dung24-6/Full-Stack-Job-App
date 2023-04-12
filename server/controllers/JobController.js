@@ -1,5 +1,6 @@
 const { JobsModel } = require("../models/Job");
 const { Op } = require("sequelize");
+const db = require("../config/config");
 
 const createJob = async (req, res) => {
   const { title,salary,requirement,description } = req.body;
@@ -119,7 +120,7 @@ const searchJobByCompany = async (req, res) => {
 const searchAllJob = async (req, res) => {
   try {
     const jobs = await JobsModel.findAll({
-      order: Sequelize.fn("RANDOM"), // order randomly
+      order: db.fn("RANDOM"), // order randomly
     });
     return res.status(200).json(jobs);
   } catch (err) {

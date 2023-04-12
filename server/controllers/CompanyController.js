@@ -4,6 +4,7 @@ const db = require("../config/config");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 
+
 const getALLCompany = async (req, res) => {
   // const session = JSON.parse(req.cookies.session);
   // const userId = session.user.userId;
@@ -86,12 +87,10 @@ const registerCompany = async (req, res) => {
     if (exitingCompany) {
       res.status(500).json("Email already in use");
     } else {
-      const salt = await bcrypt.genSalt(10); // tạo salt để hash password
-      const hashedPassword = await bcrypt.hash(password, salt); // hash password
       const company = await CompanyModel.create({
         name,
         email,
-        password: hashedPassword, // lưu hashed password vào database thay vì plaintext password
+        password, 
       });
       return res.json(company);
     }
@@ -127,8 +126,7 @@ const loginCompany = async (req, res) => {
     if (!company) {
       return res.status(400).json("Email incorrect");
     }
-    const isPasswordValid = await bcrypt.compare(password, company.password); // so sánh hashed password trong database với password người dùng nhập vào
-    if (!isPasswordValid) {
+    if (password !== company.password) {
       return res.status(400).json("Password incorrect");
     }
     req.session.company = { companyId: company.companyId };

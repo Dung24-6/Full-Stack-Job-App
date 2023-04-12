@@ -15,15 +15,15 @@ const JobsModel = db.define(
       allowNull: false,
     },
     title: {
-      type: DataTypes.STRING(600),
+      type: DataTypes.STRING(500),
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING(600),
+      type: DataTypes.STRING(3000),
       allowNull: true,
     },
     requirement: {
-      type: DataTypes.STRING(600),
+      type: DataTypes.STRING(3000),
       allowNull: true,
     },
     skills: {

@@ -12,20 +12,33 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./JobSummary.scss";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const JobSummary = ({ job, company }) => {
+  const currentCompany = useSelector((state) => {
+    if (state.company.currentCompany) {
+      return state.company.currentCompany.company;
+    }
+  });
   const formattedDate = moment(job?.create_at).fromNow();
   const [heart, setHeart] = useState(false);
+  let linesRequirement = job?.requirement.split("\n");
+  let linesDescription = job?.description.split("\n");
 
+  const regex = /^[a-zA-Z]/;
   return (
     <div className="jobSummary">
       <div className="header">
         <h1>{job?.title}</h1>
         <div className="name">{company?.name}</div>
         <div className="apply">
-          <button>
-            <Link to={`/apply/${job?.jobId}`}>Ứng tuyển</Link>
-          </button>
+          {!currentCompany ? (
+            <button>
+              <Link to={`/apply/${job?.jobId}`}>Ứng tuyển</Link>
+            </button>
+          ) : (
+            <button className="disable">Ứng tuyển</button>
+          )}
           {heart ? (
             <FontAwesomeIcon icon={faHeart} onClick={() => setHeart(false)} />
           ) : (
@@ -56,9 +69,34 @@ const JobSummary = ({ job, company }) => {
         </div>
       </div>
       <h2>Mô Tả Công Việc</h2>
-      <p>{job?.description}</p>
+      {linesDescription?.map((line, index) =>
+        regex.test(line[0]) ? (
+          <p className="bold" key={index}>
+            {line}
+          </p>
+        ) : (
+          <p key={index}>
+            {line.startsWith(".")
+              ? line
+              : line.charAt(0).toUpperCase() + line.slice(1).replace(/^\./, "")}
+          </p>
+        )
+      )}
+
       <h2>Yêu Cầu Công Việc</h2>
-      <p>{job?.requirement}</p>
+      {linesRequirement?.map((line, index) =>
+        regex.test(line[0]) ? (
+          <p className="bold" key={index}>
+            {line}
+          </p>
+        ) : (
+          <p key={index}>
+            {line.startsWith(".")
+              ? line
+              : line.charAt(0).toUpperCase() + line.slice(1).replace(/^\./, "")}
+          </p>
+        )
+      )}
     </div>
   );
 };
