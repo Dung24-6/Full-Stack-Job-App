@@ -14,5 +14,8 @@ router.get("/searchJobByCompany/:companyId", JobController.searchJobByCompany);
 
 router.get("/searchAllJob", JobController.searchAllJob);
 
+router.delete("/:jobId", JobController.deleteJob);
+
+
 
 module.exports = router;

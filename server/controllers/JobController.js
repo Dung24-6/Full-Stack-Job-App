@@ -128,6 +128,23 @@ const searchAllJob = async (req, res) => {
   }
 };
 
+const deleteJob = async (req, res) => {
+  const { jobId } = req.params;
+  if (!jobId) {
+    return res.status(400).json("Job ID is missing");
+  }
+  try {
+    const job = await JobsModel.findByPk(jobId);
+    if (!job) {
+      return res.status(404).json("Job not found");
+    }
+    await job.destroy();
+    return res.status(200).json("Job deleted successfully");
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createJob,
   searchJobByLocations,
@@ -136,4 +153,5 @@ module.exports = {
   searchJobById,
   searchJobByCompany,
   searchAllJob,
+  deleteJob,
 };
