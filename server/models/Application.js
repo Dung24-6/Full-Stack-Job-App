@@ -18,7 +18,11 @@ const ApplicationModel = db.define("application", {
   },
   cv: {
     type: DataTypes.STRING(255),
-    allowNull: false,
+    allowNull: true,
+  },
+  description: {
+    type: DataTypes.STRING(255),
+    allowNull: true,
   },
   created_at: {
     type: DataTypes.DATE,
