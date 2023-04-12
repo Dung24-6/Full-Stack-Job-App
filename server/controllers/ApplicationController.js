@@ -1,16 +1,24 @@
 const { ApplicationModel } = require("../models/Application");
+const { UsersModel } = require("../models/User");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const applyJob = async (req, res) => {
-  const { jobId , description } = req.body;
-  const userId = req.session.user.userId;
+  const { jobId, description ,companyId } = req.body;
+  const session = JSON.parse(req.cookies.session);
+  const userId = session.user.userId;
 
   try {
+    const user = await UsersModel.findOne({ where: { userId: userId } });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
     const jobApplication = new ApplicationModel({
       jobId,
       userId,
       description,
+      companyId,
+      cv: user.cv,
     });
 
     await jobApplication.save();
@@ -46,6 +54,35 @@ const applyJob = async (req, res) => {
   }
 };
 
+const getApplyJobByUserId = async (req, res) => {
+  const session = JSON.parse(req.cookies.session);
+  const userId = session.user.userId;
+
+  try {
+    const jobApplications = await ApplicationModel.findAll({
+      where: { userId: userId },
+    });
+    return res.status(200).json(jobApplications);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+const getApplyJobByCompany = async (req, res) => {
+  const { companyId } = req.params;
+
+  try {
+    const applications = await ApplicationModel.findAll({
+      where: { companyId: companyId },
+    });
+    return res.status(200).json(applications);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
 module.exports = {
   applyJob,
+  getApplyJobByUserId,
+  getApplyJobByCompany,
 };

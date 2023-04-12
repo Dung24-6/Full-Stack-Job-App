@@ -30,8 +30,8 @@ const uploadAvatar = async (req, res) => {
 
 const uploadCV = async (req, res) => {
   try {
-    const userId = req.session.user.userId;
-    console.log(req.session.user.userId + "controller");
+     const session = JSON.parse(req.cookies.session);
+     const userId = session.user.userId;
     const user = await UsersModel.findOne({ where: { userId: userId } });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
