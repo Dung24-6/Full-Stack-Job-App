@@ -6,7 +6,9 @@ const storage = multer.diskStorage({
     cb(null, "../client/public/uploads/cv");
   },
   filename: function (req, file, cb) {
-    cb(null, "cv_" + req.session.user.userId + path.extname(file.originalname));
+    const session = JSON.parse(req.cookies.session);
+    const userId = session.user.userId;
+    cb(null, "cv_" + userId + ".pdf");
   },
 });
 
