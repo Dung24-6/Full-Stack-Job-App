@@ -101,10 +101,30 @@ const deleteApplyJob = async (req, res) => {
   }
 };
 
+const getApplyJobByApplyId = async (req, res) => {
+  const { applicationId } = req.params;
+
+  try {
+    const application = await ApplicationModel.findOne({
+      where: { id: applicationId },
+    });
+
+    if (!application) {
+      return res.status(404).json({ error: "Application not found" });
+    }
+
+    return res.status(200).json(application);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+
 
 module.exports = {
   applyJob,
   getApplyJobByUserId,
   getApplyJobByCompany,
   deleteApplyJob,
+  getApplyJobByApplyId,
 };

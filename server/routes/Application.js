@@ -8,4 +8,12 @@ router.get("/", (req, res) => {
 
 router.post("/", ApplicationController.applyJob);
 
+router.get("/user", ApplicationController.getApplyJobByUserId);
+
+router.get("/company/:companyId", ApplicationController.getApplyJobByCompany);
+
+router.delete("/:applicationId", ApplicationController.deleteApplyJob);
+
+router.get("/:applicationId", ApplicationController.getApplyJobByApplyId);
+
 module.exports = router;
