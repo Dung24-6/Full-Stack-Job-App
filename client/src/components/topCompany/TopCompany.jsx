@@ -20,11 +20,11 @@ const TopCompany = () => {
       <div className="container">
         <h1>Top Companies</h1>
         <div className="listCompany">
-          {topCompanies.map(company=>
-            <CompanyCard key={company.companyId} company={company}/>
+          {topCompanies.map(company =>
+            <CompanyCard key={company.companyId} company={company} />
           )}
         </div>
-        
+
       </div>
     </div>
   );
