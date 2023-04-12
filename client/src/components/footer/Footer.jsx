@@ -4,8 +4,8 @@ import React from 'react'
 import './Footer.scss'
 
 const Footer = () => {
-  return (
-    <div className='footer'>
+    return (
+        <div className='footer'>
             <div className='container'>
                 <div className='top'>
                     <div className='about'>
@@ -21,8 +21,8 @@ const Footer = () => {
                         <span>Giải quyết khiếu nại</span>
                     </div>
                     <div className='media'>
-                    <span>Copyright © IT VIEC JSC</span>
-                    <span><FontAwesomeIcon icon={faFacebook}/></span>
+                        <span>Copyright © IT VIEC JSC</span>
+                        <span><FontAwesomeIcon icon={faFacebook} /></span>
 
 
                     </div>
@@ -33,7 +33,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default Footer

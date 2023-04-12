@@ -1,0 +1,59 @@
+.applyCard{
+    padding: 10px 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    &::before{
+        content: '';
+        height: 1px;
+        width: 100%;
+        background-color: #e2dfdf;
+        position: absolute;
+        top: -10px;
+    }
+    h1{
+        color: #4a4949;
+    }
+    h2{
+
+    }
+    p{
+
+    }
+    .action{
+        position: absolute;
+        top: 10;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        .primary {
+            width: 180px;
+            margin-top: 10px;
+            color: #fff;
+            background-color: var(--primary);
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+              background-color: rgb(211, 5, 5);
+            }
+          }
+          .outline {
+            width: 180px;
+            margin-top: 10px;
+            color: var(--primary);
+            background-color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--primary);
+            cursor: pointer;
+            &:hover {
+              background-color: #f4f2f2;
+            }}
+    }
+}

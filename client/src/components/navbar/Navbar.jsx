@@ -31,7 +31,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout(dispatch);
   };
-  const handleLogoutCompany = () =>{
+  const handleLogoutCompany = () => {
     logoutCompany(dispatch);
 
   }
@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="right">
-          {(!currentUser)&&(!currentCompany) ? (
+          {(!currentUser) && (!currentCompany) ? (
             <>
               <Link to="/loginCompany" className="link">
                 <span>For company</span>
@@ -69,16 +69,19 @@ const Navbar = () => {
                 <span>Sign up</span>
               </Link>
             </>
-          ) : ( currentUser?
+          ) : (currentUser ?
             <>
+              <Link to="/apply/user" className="link">
+                <span>Applications</span>
+              </Link>
               <div className="user" onClick={() => setOpen(!open)}>
                 <img
                   src={
                     currentUser
                       ? currentUser.avatar_url?.replace(
-                          "..\\client\\public",
-                          "\\public"
-                        )
+                        "..\\client\\public",
+                        "\\public"
+                      )
                       : "https://vn-test-11.slatic.net/p/4ae83987b3323025809f737933a4be41.jpg"
                   }
                   alt=""
@@ -101,8 +104,11 @@ const Navbar = () => {
             </>
             :
             <>
-            <Link to="/createJob" className="link">
+              <Link to="/createJob" className="link">
                 <span>Create job</span>
+              </Link>
+              <Link to="/apply/company" className="link">
+                <span>Applications</span>
               </Link>
               <div className="user" onClick={() => setOpen(!open)}>
                 <img
@@ -116,11 +122,12 @@ const Navbar = () => {
                 <span>{currentCompany?.name}</span>
                 {open && (
                   <div className="options">
-                  <Link to={`/company/${currentCompany.companyId}`} className="link" >
+
+                    <Link to={`/company/${currentCompany.companyId}`} className="link" >
                       My Company
                     </Link>
-                    
-                    
+
+
                     <Link to="/loginCompany" className="link" onClick={handleLogoutCompany}>
                       Sign out
                     </Link>

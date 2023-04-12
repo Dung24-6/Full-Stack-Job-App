@@ -1,0 +1,13 @@
+.applyList {
+    display: flex;
+    justify-content: center;
+    min-height: 700px;
+    .container {
+      width: 1000px;
+      margin: 20px;
+      background-color: #fff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }}

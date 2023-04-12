@@ -18,12 +18,12 @@ const ReviewCard = ({ review }) => {
     <div className="reviewCard">
       <h2>{review.title}</h2>
       <div className="rating">
-        {rating.map((i,index)=>(
-          i===1?<FontAwesomeIcon key={index} icon={faStar} className="blue" />:<FontAwesomeIcon key={index} icon={faStar} />
+        {rating.map((i, index) => (
+          i === 1 ? <FontAwesomeIcon key={index} icon={faStar} className="blue" /> : <FontAwesomeIcon key={index} icon={faStar} />
         ))}
-        
-        
-        
+
+
+
       </div>
       <div className="date">{formattedDate}</div>
       <div className="description">{review.comment}</div>

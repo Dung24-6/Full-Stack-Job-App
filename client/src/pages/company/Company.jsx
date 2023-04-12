@@ -12,12 +12,12 @@ import JobSummary from "../../components/jobSummary/JobSummary";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
-import JobCard from "../../components/jobCard/jobCard";
+import JobCard from "../../components/jobCard/JobCard";
 
 const Company = () => {
   const location = useLocation();
   const companyId = location.pathname.split("/")[2];
-  const [company, setCompany] = useState("");
+  const [company, setCompany] = useState({});
   const [jobs, setJobs] = useState([]);
   const [jobSelect, setJobSelect] = useState(0);
   const [option, setOption] = useState("Jobs");
@@ -139,7 +139,7 @@ const Company = () => {
             <ListJob>
               {jobs.map((job) => (
                 <div key={job.jobId} onClick={() => handleJobClick(job.jobId)}>
-                  <JobCard job={job} selected={job.jobId === jobSelect} />
+                  <JobCard job={job} selected={job.jobId === jobSelect} setJobs={setJobs} />
                 </div>
               ))}
             </ListJob>

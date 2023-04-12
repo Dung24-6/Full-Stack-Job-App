@@ -69,7 +69,8 @@ const getApplyJobByUserId = async (req, res) => {
 };
 
 const getApplyJobByCompany = async (req, res) => {
-  const { companyId } = req.params;
+  const session = JSON.parse(req.cookies.session);
+  const companyId = session.company.companyId;
 
   try {
     const applications = await ApplicationModel.findAll({
@@ -86,7 +87,7 @@ const deleteApplyJob = async (req, res) => {
 
   try {
     const application = await ApplicationModel.findOne({
-      where: { id: applicationId },
+      where: { applicationId: applicationId },
     });
 
     if (!application) {
@@ -106,7 +107,7 @@ const getApplyJobByApplyId = async (req, res) => {
 
   try {
     const application = await ApplicationModel.findOne({
-      where: { id: applicationId },
+      where: { applicationId: applicationId },
     });
 
     if (!application) {

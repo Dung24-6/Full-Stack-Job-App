@@ -20,7 +20,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ user: userReducer,company:companyReducer });
+const rootReducer = combineReducers({ user: userReducer, company: companyReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
