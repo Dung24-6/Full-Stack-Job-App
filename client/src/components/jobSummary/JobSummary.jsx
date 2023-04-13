@@ -20,10 +20,16 @@ const JobSummary = ({ job, company }) => {
       return state.company.currentCompany.company;
     }
   });
+  const currentUser = useSelector((state) => {
+    if (state.user.currentUser) {
+      return state.user.currentUser.user;
+    }
+  });
   const formattedDate = moment(job?.created_at).fromNow();
   const [heart, setHeart] = useState(false);
-  let linesRequirement = job?.requirement.split("\n");
-  let linesDescription = job?.description.split("\n");
+  // console.log(job.requirements, job.description)
+  let linesRequirement = job?.requirement?.split("\n");
+  let linesDescription = job?.description?.split("\n");
 
   const regex = /^[a-zA-Z]/;
   return (
@@ -32,7 +38,7 @@ const JobSummary = ({ job, company }) => {
         <h1>{job?.title}</h1>
         <div className="name">{company?.name}</div>
         <div className="apply">
-          {!currentCompany ? (
+          {(!currentCompany)&&currentUser ? (
             <button>
               <Link to={`/apply/${job?.jobId}`}>Ứng tuyển</Link>
             </button>

@@ -14,6 +14,7 @@ import axios from "axios";
 import ReviewCard from "../../components/reviewCard/ReviewCard";
 import JobCard from "../../components/jobCard/JobCard";
 import Report from "../../components/report/Report";
+import { useSelector } from "react-redux";
 
 
 const Company = () => {
@@ -26,6 +27,17 @@ const Company = () => {
   const [reviews, setReviews] = useState([]);
   const [open, setOpen] = useState(false)
   const [reviewSelect, setReviewSelect] = useState('');
+
+  const currentUser = useSelector((state) => {
+    if (state.user.currentUser) {
+      return state.user.currentUser.user;
+    }
+  });
+  const currentCompany = useSelector((state) => {
+    if (state.company.currentCompany) {
+      return state.company.currentCompany.company;
+    }
+  });
 
 
   const handleJobClick = (id) => {
@@ -121,10 +133,18 @@ const Company = () => {
               </div>
             </div>
             <div className="header-btn">
-              <button className="primary">
+              {/* <button className="primary">
                 <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
-              </button>
-              <button className="outline">Theo dõi</button>
+              </button> */}
+              {(!currentCompany) && currentUser ? (
+                <button>
+                  <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
+
+                </button>
+              ) : (
+                <button className="disable">Viết đánh giá</button>
+              )}
+              {/* <button className="outline">Theo dõi</button> */}
             </div>
           </header>
           <div className="options">
@@ -166,9 +186,17 @@ const Company = () => {
               <div className="letWrite">
                 <h2>Let your voice be heard.</h2>
                 <span>Review {company.name} now</span>
-                <button className="primary">
-                  <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
-                </button>
+                
+
+                {(!currentCompany) && currentUser ? (
+                  <button>
+                    <Link to={`/review/${company.companyId}`}>Viết đánh giá</Link>
+
+                  </button>
+                ) : (
+                  <button className="disable">Viết đánh giá</button>
+                )}
+
               </div>
             </div>
           )}

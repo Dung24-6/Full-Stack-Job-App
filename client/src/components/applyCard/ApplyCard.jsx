@@ -47,9 +47,11 @@ const ApplyCard = ({ apply, setApplyList }) => {
     }, [apply])
     return (
         <div className="applyCard">
-            <h1>{job.title} tại {company.name}</h1>
-            <h2>Name: {user.username}</h2>
-            <p>{apply.description}</p>
+            <div className='info'>
+                <h1>{job.title} tại {company.name}</h1>
+                <h2>Name: {user.username}</h2>
+                <p>Lời nhắn: {apply.description}</p>
+            </div>
             <div className='action'>
                 <button className='outline' onClick={handleDelete}>Delete</button>
                 <button className='primary' onClick={downloadFile}>Download CV</button>
