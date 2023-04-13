@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("../config/config");
 const { CompanyModel } = require("./Company");
 const { UsersModel } = require("./User");
+const { ReportReviewModel } = require("./ReportReview");
 
 const ReviewCompanyModel = db.define(
   "reviewCompany",
@@ -60,5 +61,13 @@ const ReviewCompanyModel = db.define(
     freezeTableName: true,
   }
 );
+
+ReviewCompanyModel.hasMany(ReportReviewModel, {
+  foreignKey: "reviewId",
+  sourceKey: "reviewId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+  hooks: true,
+});
 
 module.exports = { ReviewCompanyModel };
