@@ -7,7 +7,7 @@ export const userColumns = [
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
-            <img className="cellImg" src={params.row.img} alt="avatar" />
+            {/* <img className="cellImg" src={params.row.avatar_url} alt="avatar" /> */}
             {params.row.username}
           </div>
         );
@@ -19,25 +19,46 @@ export const userColumns = [
       flex: 230,
     },
   
+    // {
+    //   field: "age",
+    //   headerName: "Age",
+    //   flex: 100,
+    // },
+    // {
+    //   field: "status",
+    //   headerName: "Status",
+    //   flex: 160,
+    //   renderCell: (params) => {
+    //     return (
+    //       <div className={`cellWithStatus ${params.row.status}`}>
+    //         {params.row.status}
+    //       </div>
+    //     );
+    //   },
+    // },
+  ];
+  
+  export const companyColumns = [
+    { field: "id", headerName: "ID", flex: 70 },
     {
-      field: "age",
-      headerName: "Age",
-      flex: 100,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 160,
+      field: "user",
+      headerName: "Company",
+      flex: 230,
       renderCell: (params) => {
         return (
-          <div className={`cellWithStatus ${params.row.status}`}>
-            {params.row.status}
+          <div className="cellWithImg">
+            <img className="cellImg" src={params.row.logo_url} alt="avatar" />
+            {params.row.name}
           </div>
         );
       },
     },
-  ];
-  
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 230,
+    },
+  ]
   //temporary data
   export const userRows = [
     {

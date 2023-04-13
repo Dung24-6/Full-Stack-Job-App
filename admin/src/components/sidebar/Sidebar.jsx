@@ -45,10 +45,10 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/products">
+          <Link to="/companies">
             <li>
               <StoreOutlined />
-              <span>Products</span>
+              <span>Companies</span>
             </li>
           </Link>
 
@@ -90,6 +90,7 @@ const Sidebar = () => {
             <AccountCircleOutlined />
             <span>Profile</span>
           </li>
+          
           <li>
             <Logout />
             <span>Logout</span>

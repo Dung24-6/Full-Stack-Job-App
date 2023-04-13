@@ -3,11 +3,11 @@ const { ReviewCompanyModel } = require("../models/ReviewCompany");
 const { Op } = require("sequelize");
 
 const reportReview = async (req, res) => {
-  const session = JSON.parse(req.cookies.session);
-  const userId = session.user.userId;
-  //const userId = req.session.user.userId;
+  // const session = JSON.parse(req.cookies.session);
+  // const userId = session.user.userId;
+  const userId = req.session.user.userId;
   const { reviewId } = req.params;
-  const { reason } = req.body;
+  const { reason , comment} = req.body;
   if (!(reviewId && reason && userId)) {
     return res.status(400).json("Not enough params");
   }
@@ -22,6 +22,8 @@ const reportReview = async (req, res) => {
       userId: userId,
       reviewId: reviewId,
       reason: reason,
+      comment: comment,
+      companyId: review.companyId,
     });
     return res.status(200).json(report);
   } catch (err) {

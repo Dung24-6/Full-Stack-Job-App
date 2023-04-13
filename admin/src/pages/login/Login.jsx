@@ -1,26 +1,61 @@
-import './login.scss'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./login.scss";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/apiCalls";
+import { useSelector } from "react-redux";
 
 const Login = () => {
-  return (
-    <div className='login'>
-      <div className="card">
-        <div className="left">
-          <h1>Hello World.</h1>
-          <p>This is my new project</p>
-          <span>Don't you have an account?</span>
-          <button>Register</button>
-        </div>
-        <div className="right">
-          <h1>Login</h1> 
-          <form action="">
-            <input type="text" placeholder='Username' />
-            <input type="password" placeholder='Password' />
-            <button>Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  )
-}
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { email, password });
+  };
+  const user = useSelector((state) => state.user.currentUser);
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
-export default Login
+  return (
+    <div className="login">
+      <form className="container">
+        <h2>Welcome</h2>
+        <label htmlFor="email">
+          <span>Email Address</span>
+          <abbr>*</abbr>
+        </label>
+        <input
+          id="email"
+          type="text"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label htmlFor="password">
+          <span>Password</span>
+          <abbr>*</abbr>
+        </label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button onClick={handleClick}>Sign in with Email</button>
+        <footer>
+          <div>
+            Do not have an account?
+            <Link to="/register">Sign up now!</Link>
+          </div>
+        </footer>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
