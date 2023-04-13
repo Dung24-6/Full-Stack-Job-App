@@ -120,7 +120,7 @@ const getApplyJobByApplyId = async (req, res) => {
   }
 };
 
-const getCountApplications = async () => {
+const getCountApplications = async (req, res) => {
   try {
     const count = await ApplicationModel.count();
     return res.status(200).json(count);

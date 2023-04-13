@@ -61,7 +61,7 @@ const deleteReport = async (req, res) => {
 
 const getAllReport = async (req, res) => {
   try {
-    const reports = await ReportModel.findAll();
+    const reports = await ReportReviewModel.findAll();
     return res.status(200).json(reports);
   } catch (err) {
     return res.status(400).json({ error: err.message });

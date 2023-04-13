@@ -18,7 +18,7 @@ const Datatable = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await publicRequest.get(`${name==='users'?'users':'company'}`)
+        const res = await publicRequest.get(`${name === 'users' ? 'users' : 'company'}`)
         console.log(res.data);
         setData(res.data);
       } catch (error) {
@@ -30,9 +30,13 @@ const Datatable = () => {
 
   const handleDelete = (id) => {
     // delete user here
-    setList(list.filter((item) =>name==='users'?item.userId:item.companyId !== id));
+    setList(list.filter((item) =>
+      (name === 'users' ?
+        item.userId
+        : item.companyId)
+      !== id));
   };
-  
+
 
   const actionColumn = [
     {
@@ -47,7 +51,7 @@ const Datatable = () => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(name==='users'?params.row.userId:params.row.companyId)}
+              onClick={() => handleDelete(name === 'users' ? params.row.userId : params.row.companyId)}
             >
               Delete
             </div>
@@ -59,7 +63,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
+        Add New {name === 'users' ?"User":"Company"}
         <Link to="/users/new" className="link">
           Add New
         </Link>
@@ -67,11 +71,11 @@ const Datatable = () => {
       <DataGrid
         className="datagrid"
         rows={list}
-        columns={name==='users'?userColumns.concat(actionColumn):companyColumns.concat(actionColumn)}
+        columns={name === 'users' ? userColumns.concat(actionColumn) : companyColumns.concat(actionColumn)}
         pageSize={9}
         checkboxSelection
         autoHeight
-        getRowId={(row) => name==='users'?row.userId:row.companyId}
+        getRowId={(row) => name === 'users' ? row.userId : row.companyId}
       />
     </div>
   );
