@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review,setOpen,setReviewSelect }) => {
   const formattedDate = moment(review.created_at).fromNow();
 
   let rating = [];
@@ -13,6 +13,10 @@ const ReviewCard = ({ review }) => {
   }
   for (let i = 0; i < 5 - review.rating; i++) {
     rating.push(0);
+  }
+  const handleOpen = ()=>{
+    setOpen(true);
+    setReviewSelect(review.reviewId);
   }
   return (
     <div className="reviewCard">
@@ -27,6 +31,7 @@ const ReviewCard = ({ review }) => {
       </div>
       <div className="date">{formattedDate}</div>
       <div className="description">{review.comment}</div>
+      <button className="primary" onClick={handleOpen}>Report</button>
     </div>
   );
 };
