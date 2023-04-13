@@ -1,6 +1,7 @@
 const { ReviewCompanyModel } = require("../models/ReviewCompany");
 const { CompanyModel } = require("../models/Company");
-const { Op } = require("sequelize");
+const { Op, sequelize } = require("sequelize");
+const db = require("../config/config");
 
 const getReviewsByCompanyId = async (req, res) => {
   try {
@@ -78,9 +79,7 @@ const getAverageRatingByCompany = async (req, res) => {
   const { companyId } = req.params;
   try {
     const avgRating = await ReviewCompanyModel.findOne({
-      attributes: [
-        [sequelize.fn("AVG", sequelize.col("rating")), "average_rating"],
-      ],
+      attributes: [[db.fn("AVG", db.col("rating")), "average_rating"]],
       where: { companyId: companyId },
     });
     return res.status(200).json(avgRating);
@@ -89,6 +88,27 @@ const getAverageRatingByCompany = async (req, res) => {
   }
 };
 
+const getTopRatedCompanies = async (req, res) => {
+  try {
+    const topCompanies = await CompanyModel.findAll({
+      attributes: [
+        "companyId",
+        "name",
+        [
+          db.literal(
+            `(SELECT AVG(rating) FROM ReviewCompanies WHERE companyId = company.companyId)`
+          ),
+          "average_rating",
+        ],
+      ],
+      order: [[db.literal("average_rating"), "DESC"]],
+      limit: 10,
+    });
+    return res.status(200).json(topCompanies);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
 
 
 module.exports = {
@@ -97,4 +117,5 @@ module.exports = {
   deleteReview,
   getReviewById,
   getAverageRatingByCompany,
+  getTopRatedCompanies,
 };

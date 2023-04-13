@@ -14,4 +14,11 @@ router.delete("/reviews/:reviewId", ReviewController.deleteReview);
 
 router.get("/:reviewId", ReviewController.getReviewById);
 
+router.get(
+  "/getAverageRatingByCompany/:companyId",
+  ReviewController.getAverageRatingByCompany
+);
+
+router.get("/getTopRatedCompanies", ReviewController.getTopRatedCompanies);
+
 module.exports = router;
