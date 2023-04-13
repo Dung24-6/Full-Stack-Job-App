@@ -19,6 +19,4 @@ router.post("/privateLogin", UserController.privateLogin);
 
 router.put("/updateUser", UserController.updateUser);
 
-router.get("/countUsers", checkAdmin.checkAdmin, UserController.countUsers);
-
 module.exports = router;

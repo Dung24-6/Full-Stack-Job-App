@@ -149,6 +149,7 @@ const deleteJob = async (req, res) => {
 const getJobCount = async (req, res) => {
   try {
     const count = await JobsModel.count();
+    console.log(count);
     return res.status(200).json(count);
   } catch (err) {
     return res.status(500).json({ error: err.message });
