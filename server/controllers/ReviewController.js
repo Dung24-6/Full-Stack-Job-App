@@ -59,8 +59,42 @@ const deleteReview = async (req, res) => {
   }
 };
 
+const getReviewById = async (req, res) => {
+  const { reviewId } = req.params;
+  try {
+    const review = await ReviewCompanyModel.findOne({
+      where: { reviewId: reviewId },
+    });
+    if (!review) {
+      return res.status(400).json("Invalid review id");
+    }
+    return res.status(200).json(review);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+const getAverageRatingByCompany = async (req, res) => {
+  const { companyId } = req.params;
+  try {
+    const avgRating = await ReviewCompanyModel.findOne({
+      attributes: [
+        [sequelize.fn("AVG", sequelize.col("rating")), "average_rating"],
+      ],
+      where: { companyId: companyId },
+    });
+    return res.status(200).json(avgRating);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+
+
 module.exports = {
   getReviewsByCompanyId,
   createReview,
   deleteReview,
+  getReviewById,
+  getAverageRatingByCompany,
 };
