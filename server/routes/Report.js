@@ -6,9 +6,9 @@ router.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-router.post("/reviews/:reviewId/report", ReportController.reportReview);
+router.post("/reviews/:reviewId", ReportController.reportReview);
 
-router.get("/reviews/:reviewId/reports", ReportController.getReportsByReviewId);
+router.get("/reviews/:reviewId", ReportController.getReportsByReviewId);
 
 router.delete("/:reportId", ReportController.deleteReport);
 

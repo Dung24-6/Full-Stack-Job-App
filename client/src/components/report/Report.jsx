@@ -6,7 +6,7 @@ import { publicRequest } from '../../requestMethods';
 const Report = ({setOpen,reviewSelect}) => {
   const [reason,setReason]= useState('');
   const handleSubmit = async ()=>{
-    await publicRequest.post(`/report/reviews/${reviewSelect}/report`,{reason})
+    await publicRequest.post(`/report/reviews/${reviewSelect}`,{reason})
     setOpen(false)
   }
   return (

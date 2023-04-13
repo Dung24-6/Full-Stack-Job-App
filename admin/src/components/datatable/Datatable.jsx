@@ -1,15 +1,38 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { companyColumns, userColumns, userRows } from "../../datatablesource";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../requestMethods"
 
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  const location = useLocation();
+  const name = location.pathname.split('/')[1]
+  const [list, setList] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setList(data);
+  }, [data])
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await publicRequest.get(`${name==='users'?'users':'company'}`)
+        console.log(res.data);
+        setData(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
+  }, [name]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    // delete user here
+    setList(list.filter((item) =>name==='users'?item.userId:item.companyId !== id));
   };
+  
 
   const actionColumn = [
     {
@@ -24,7 +47,7 @@ const Datatable = () => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(name==='users'?params.row.userId:params.row.companyId)}
             >
               Delete
             </div>
@@ -43,11 +66,12 @@ const Datatable = () => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
+        rows={list}
+        columns={name==='users'?userColumns.concat(actionColumn):companyColumns.concat(actionColumn)}
         pageSize={9}
         checkboxSelection
         autoHeight
+        getRowId={(row) => name==='users'?row.userId:row.companyId}
       />
     </div>
   );

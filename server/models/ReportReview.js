@@ -44,11 +44,11 @@ const ReportReviewModel = db.define(
       onDelete: "CASCADE",
     },
     reason: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(1000),
       allowNull: false,
     },
     comment: {
-      type: DataTypes.STRING(600),
+      type: DataTypes.STRING(1000),
       allowNull: true,
     },
     created_at: {
