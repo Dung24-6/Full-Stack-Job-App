@@ -1,35 +1,60 @@
-.reviewCard{
+.reviewCard {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 50px 20px;
     position: relative;
-    &::before{
+
+    &::before {
         content: '';
         position: absolute;
         width: 100%;
         height: 1px;
         background-color: #a1a1a1;
-        top:0;
+        top: 0;
         left: 0;
     }
-   h2{
-    font-weight: 400;
-    color: #444343;
-   }
-   .rating{
-    color: #a1a1a1;
-    font-size: 16px;
-    .blue{
-        color: rgb(4, 71, 187);
 
+    h2 {
+        font-weight: 400;
+        color: #444343;
     }
-   }
-   .date{
-    font-size: 13px;
-    color: #a6a5a5;
-   }
-   .description{
-    font-size: 16px;
-   }
+
+    .rating {
+        color: #a1a1a1;
+        font-size: 16px;
+
+        .blue {
+            color: rgb(4, 71, 187);
+
+        }
+    }
+
+    .date {
+        font-size: 13px;
+        color: #a6a5a5;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .primary {
+        width: 100px;
+        margin-top: 10px;
+        color: #fff;
+        background-color: var(--primary);
+        font-size: 18px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+
+        &:hover {
+            background-color: rgb(211, 5, 5);
+        }
+    }
 }

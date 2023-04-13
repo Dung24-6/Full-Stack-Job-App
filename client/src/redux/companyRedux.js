@@ -19,16 +19,16 @@ const companySlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
-    updateCompanySuccess:(state,action)=>{
+    updateCompanySuccess: (state, action) => {
       state.currentCompany.company = action.payload
     },
-    logoutCompanySuccess:(state) => {
+    logoutCompanySuccess: (state) => {
       state.currentCompany = null;
-      state.isFetching=false;
-      state.error=false;
+      state.isFetching = false;
+      state.error = false;
     },
   },
 });
 
-export const { loginCompanyStart, loginCompanySuccess, loginCompanyFailure,updateCompanySuccess ,logoutCompanySuccess} = companySlice.actions;
+export const { loginCompanyStart, loginCompanySuccess, loginCompanyFailure, updateCompanySuccess, logoutCompanySuccess } = companySlice.actions;
 export default companySlice.reducer;

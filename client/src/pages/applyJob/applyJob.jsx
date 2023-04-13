@@ -20,11 +20,11 @@ const ApplyJob = () => {
     }
   });
 
-  const [job, setJob] = useState();
-  const [company, setCompany] = useState();
+  const [job, setJob] = useState({});
+  const [company, setCompany] = useState({});
   const [name, setName] = useState(currentUser.username);
-  const [cv, setCv] = useState();
-  const [reason, setReason] = useState();
+  const [cv, setCv] = useState('');
+  const [reason, setReason] = useState('');
 
   useEffect(() => {
     const getJob = async () => {
@@ -57,12 +57,12 @@ const ApplyJob = () => {
 
   const handleSubmit = async () => {
     const data = new FormData();
-    data.append("cv", file);
+    data.append("cv", cv);
     try {
-      const resApp = await publicRequest.post('application', { jobId, reason })
       const resCV = await publicRequest.post('upload/uploadCV', data)
-      console.log(resApp)
-      console.log(resCV)
+      const resApp = await publicRequest.post('application', { jobId, description: reason, companyId: job.companyId })
+      window.location.href = `/apply/user`;
+
     } catch (error) {
       console.log(error);
     }

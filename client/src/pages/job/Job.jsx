@@ -8,8 +8,8 @@ import axios from "axios";
 const Job = () => {
   const location = useLocation();
   const jobId = location.pathname.split("/")[2];
-  const [company, setCompany] = useState();
-  const [job, setJob] = useState();
+  const [company, setCompany] = useState({});
+  const [job, setJob] = useState({});
 
   useEffect(() => {
     const getJob = async () => {

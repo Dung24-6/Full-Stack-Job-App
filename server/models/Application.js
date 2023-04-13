@@ -7,6 +7,7 @@ const ApplicationModel = db.define("application", {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+    field: 'applicationId',
   },
   jobId: {
     type: DataTypes.INTEGER,
@@ -38,6 +39,10 @@ const ApplicationModel = db.define("application", {
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-});
+},
+  {
+    freezeTableName: true,
+  }
+);
 
 module.exports = { ApplicationModel };

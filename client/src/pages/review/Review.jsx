@@ -29,16 +29,16 @@ const Review = () => {
     getCompany();
   }, []);
 
-  const handleRating = (i) =>{
-    i===rating?setRating(0):setRating(i)
+  const handleRating = (i) => {
+    i === rating ? setRating(0) : setRating(i)
   }
 
-  const handleSubmit = async()=> {
-    const newReview ={
-      rating,comment,title
+  const handleSubmit = async () => {
+    const newReview = {
+      rating, comment, title
     }
     try {
-       await axios.post(`http://localhost:8000/review/reviews/${companyId}`,newReview,{
+      await axios.post(`http://localhost:8000/review/reviews/${companyId}`, newReview, {
         withCredentials: true,
       })
       window.location.href = `/company/${companyId}`;
@@ -61,15 +61,15 @@ const Review = () => {
         </span>
         <h3>Đánh giá tổng quát</h3>
         <div className="rating">
-          {[1,2,3,4,5].map(i=>(
-            <FontAwesomeIcon key={i} icon={faStar} className={i<=rating?'blue':''} onClick={()=>handleRating(i)}/>
+          {[1, 2, 3, 4, 5].map(i => (
+            <FontAwesomeIcon key={i} icon={faStar} className={i <= rating ? 'blue' : ''} onClick={() => handleRating(i)} />
           ))}
-            
+
         </div>
         <h3>Tiêu đề</h3>
-        <input placeholder="Tóm tắt" onChange={(e)=>setTitle(e.target.value)}/>
+        <input placeholder="Tóm tắt" onChange={(e) => setTitle(e.target.value)} />
         <h3>Nhận xét của bạn</h3>
-        <textarea placeholder="Bạn nghĩ gì về công ty?" name="" id="" cols="30" rows="10" onChange={(e)=>setComment(e.target.value)}></textarea>
+        <textarea placeholder="Bạn nghĩ gì về công ty?" name="" id="" cols="30" rows="10" onChange={(e) => setComment(e.target.value)}></textarea>
         <button onClick={handleSubmit}>Đánh giá</button>
       </div>
     </div>

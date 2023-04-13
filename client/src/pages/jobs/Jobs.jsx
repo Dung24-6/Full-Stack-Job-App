@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import JobCard from "../../components/jobCard/jobCard";
+import JobCard from "../../components/jobCard/JobCard";
 import JobSummary from "../../components/jobSummary/JobSummary";
 import ListJob from "../../components/listJob/ListJob";
 import axios from "axios";
@@ -18,7 +18,7 @@ const Jobs = () => {
   const location = useLocation();
   const prompt = location.search;
   const [jobSelect, setJobSelect] = useState(0);
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState({});
 
   const locationData = ["Hà Nội", "Hồ Chí Minh", "Đà Nẵng"];
   const salaryData = [">500$", ">1000$", ">2000$", ">2500$"];
@@ -30,7 +30,7 @@ const Jobs = () => {
   useEffect(() => {
     const getJobList = async () => {
       try {
-        if (prompt&&prompt.length>8) {
+        if (prompt && prompt.length > 8) {
           const response = await axios.get(
             `http://localhost:8000/job/searchJob${prompt}`
           );
@@ -75,16 +75,16 @@ const Jobs = () => {
   useEffect(() => {
     filter
       ? setJobsFiltered(
-          jobs.filter((job) => {
-            return Object.entries(filter).every(([key, value]) => {
-              return (
-                (key === "salary"
-                  ? job[key] > parseInt(value.substring(1, value.length - 1))
-                  : job[key] === value) || filter[key] === ""
-              );
-            });
-          })
-        )
+        jobs.filter((job) => {
+          return Object.entries(filter).every(([key, value]) => {
+            return (
+              (key === "salary"
+                ? job[key] > parseInt(value.substring(1, value.length - 1))
+                : job[key] === value) || filter[key] === ""
+            );
+          });
+        })
+      )
       : setJobsFiltered(jobs);
   }, [filter, jobs]);
 
@@ -113,7 +113,7 @@ const Jobs = () => {
               company={company}
             />
           </>
-        {/* :<h1 style={{height:'700px'}}>Can not Find Any Job</h1>} */}
+          {/* :<h1 style={{height:'700px'}}>Can not Find Any Job</h1>} */}
         </div>
       </div>
     </div>

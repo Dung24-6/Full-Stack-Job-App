@@ -19,16 +19,16 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
-    updateSuccess:(state,action)=>{
+    updateSuccess: (state, action) => {
       state.currentUser.user = action.payload
     },
-    logoutSuccess:(state) => {
+    logoutSuccess: (state) => {
       state.currentUser = null;
-      state.isFetching=false;
-      state.error=false;
+      state.isFetching = false;
+      state.error = false;
     },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure,updateSuccess ,logoutSuccess} = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, updateSuccess, logoutSuccess } = userSlice.actions;
 export default userSlice.reducer;

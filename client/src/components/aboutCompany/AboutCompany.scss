@@ -19,37 +19,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     .logo-img {
       width: 100%;
       object-fit: cover;
     }
   }
+
   .name {
     margin-top: 10px;
     font-size: 19px;
     height: 70px;
     text-align: center;
   }
+
   .info {
     font-size: 14px;
     width: 110px;
     margin-bottom: 15px;
+
     .flag {
       width: 14px;
       height: 14px;
       border-radius: 7px;
     }
+
     svg,
     img {
       margin-right: 5px;
     }
   }
+
   .wrap-info {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     padding: 20px;
   }
+
   .outline {
     width: 180px;
     color: var(--primary);

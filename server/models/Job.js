@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/config");
+const { ApplicationModel } = require("./Application");
 
 const JobsModel = db.define(
   "jobs",
@@ -58,5 +59,14 @@ const JobsModel = db.define(
     freezeTableName: true,
   }
 );
+
+JobsModel.hasMany(ApplicationModel, {
+  foreignKey: "jobId",
+  sourceKey: "jobId",
+  onDelete: "cascade",
+  onUpdate: "NO ACTION",
+  hooks: true,
+});
+
 
 module.exports = { JobsModel };
