@@ -152,6 +152,16 @@ const logoutCompany = async (req, res) => {
   }
 };
 
+// Tổng số lượng công việc đăng tải
+const getCompanyCount = async (req, res) => {
+  try {
+    const count = await CompanyModel.count();
+    return res.status(200).json(count);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   getALLCompany,
   registerCompany,
@@ -160,4 +170,5 @@ module.exports = {
   deleteCompany,
   logoutCompany,
   getTopCompanies,
+  getCompanyCount,
 };
