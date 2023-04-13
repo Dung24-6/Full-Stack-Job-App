@@ -222,6 +222,15 @@ const updateUser = async (req, res) => {
   }
 };
 
+const countUsers = async (req, res) => {
+  try {
+    const count = await UsersModel.count();
+    return res.status(200).json(count);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
 
 module.exports = {
   getALLUsers,
@@ -234,4 +243,5 @@ module.exports = {
   getAvatar,
   deleteCV,
   updateUser,
+  countUsers,
 };

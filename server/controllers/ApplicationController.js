@@ -119,6 +119,29 @@ const getApplyJobByApplyId = async (req, res) => {
   }
 };
 
+const getCountApplications = async () => {
+  try {
+    const distinctJobIds = await ApplicationModel.count({
+      col: "jobId",
+      distinct: true,
+    });
+
+    const totalApplications = await ApplicationModel.count();
+
+    const totalCounts = distinctJobIds.reduce(
+      (total, count) => total + count,
+      0
+    );
+
+    console.log(`Total number of job applications: ${totalApplications}`);
+    console.log(
+      `Total number of distinct job applications: ${distinctJobIds.length}`
+    );
+    console.log(`Total number of job applications per job: ${totalCounts}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 module.exports = {
@@ -127,4 +150,5 @@ module.exports = {
   getApplyJobByCompany,
   deleteApplyJob,
   getApplyJobByApplyId,
+  getCountApplications,
 };

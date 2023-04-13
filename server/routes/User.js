@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/UserController");
-const uploadAvatar = require("../middleware/UploadAvatar");
-const uploadCV = require("../middleware/UploadCV");
+const checkAdmin = require("../middleware/checkAdmin");
 
 router.get("/", UserController.getALLUsers);
 
@@ -19,5 +18,7 @@ router.post("/logout", UserController.logoutUser);
 router.post("/privateLogin", UserController.privateLogin);
 
 router.put("/updateUser", UserController.updateUser);
+
+router.get("/countUsers", checkAdmin.checkAdmin, UserController.countUsers);
 
 module.exports = router;

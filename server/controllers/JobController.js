@@ -145,6 +145,16 @@ const deleteJob = async (req, res) => {
   }
 };
 
+// Tổng số lượng công việc đăng tải
+const getJobCount = async (req, res) => {
+  try {
+    const count = await JobsModel.count();
+    return res.status(200).json(count);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   createJob,
   searchJobByLocations,
@@ -154,4 +164,5 @@ module.exports = {
   searchJobByCompany,
   searchAllJob,
   deleteJob,
+  getJobCount,
 };
