@@ -20,7 +20,7 @@ const JobSummary = ({ job, company }) => {
       return state.company.currentCompany.company;
     }
   });
-  const formattedDate = moment(job?.create_at).fromNow();
+  const formattedDate = moment(job?.created_at).fromNow();
   const [heart, setHeart] = useState(false);
   let linesRequirement = job?.requirement.split("\n");
   let linesDescription = job?.description.split("\n");

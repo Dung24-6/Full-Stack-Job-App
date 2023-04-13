@@ -18,7 +18,8 @@ const JobCard = ({ job, selected, setJobs }) => {
     }
   });
 
-  const formattedDate = moment(job.create_at).fromNow();
+  const formattedDate = moment(job.created_at).fromNow();
+
 
   const handleDelete = async () => {
     try {

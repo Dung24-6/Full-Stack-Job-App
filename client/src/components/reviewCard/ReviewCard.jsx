@@ -5,7 +5,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 
 const ReviewCard = ({ review }) => {
-  const formattedDate = moment(review.create_at).fromNow();
+  const formattedDate = moment(review.created_at).fromNow();
 
   let rating = [];
   for (let i = 0; i < review.rating; i++) {
