@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ReportController = require("../controllers/ReportController");
 
-router.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 
 router.post("/reviews/:reviewId", ReportController.reportReview);
 

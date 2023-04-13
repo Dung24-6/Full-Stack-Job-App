@@ -16,9 +16,15 @@ import {
 } from "@mui/icons-material";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
-
+import {useDispatch} from "react-redux"
+import {logout} from '../../redux/apiCalls'
 const Sidebar = () => {
+  const dispatch2 = useDispatch();
   const { dispatch } = useContext(DarkModeContext);
+
+  const handleLogout = ()=>{
+    logout(dispatch2);
+  }
 
   return (
     <div className="sidebar">
@@ -51,11 +57,14 @@ const Sidebar = () => {
               <span>Companies</span>
             </li>
           </Link>
+          <Link to="/report">
 
           <li>
             <CreditCard />
-            <span>Orders</span>
+            <span>Reports</span>
           </li>
+          </Link>
+
           <li>
             <LocalShippingOutlined />
             <span>Delivery</span>
@@ -91,10 +100,12 @@ const Sidebar = () => {
             <span>Profile</span>
           </li>
           
-          <li>
-            <Logout />
-            <span>Logout</span>
-          </li>
+          <Link to='/login' onClick={handleLogout}>
+            <li>
+              <Logout />
+              <span>Logout</span>
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="bottom">

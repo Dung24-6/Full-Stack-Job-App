@@ -4,16 +4,33 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../requestMethods";
+import { DomainVerificationOutlined } from "@mui/icons-material";
 
 const Widget = ({ type }) => {
   let data;
 
+  const [amount, setAmount] =useState(0)
+  useEffect(()=>{
+    const getAmount = async ()=>{
+      try {
+        const res = await publicRequest.get(`count/count${type.charAt(0).toUpperCase() + type.slice(1)}`);
+        setAmount(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAmount();
+  },[type])
+
   //temporary
-  const amount = 100;
   const diff = 20;
 
   switch (type) {
-    case "user":
+    case "users":
       data = {
         title: "USERS",
         isMoney: false,
@@ -29,14 +46,20 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "company":
       data = {
-        title: "ORDERS",
+        title: "COMPANIES",
         isMoney: false,
-        link: "View all orders",
+        link: "See all companies",
         icon: (
-          <ShoppingCartOutlinedIcon
-            className="icon"
+          // <ShoppingCartOutlinedIcon
+          //   className="icon"
+          //   style={{
+          //     backgroundColor: "rgba(218, 165, 32, 0.2)",
+          //     color: "goldenrod",
+          //   }}
+          // />
+          <ApartmentIcon className="icon"
             style={{
               backgroundColor: "rgba(218, 165, 32, 0.2)",
               color: "goldenrod",
@@ -45,27 +68,37 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "job":
       data = {
-        title: "EARNINGS",
-        isMoney: true,
-        link: "View net earnings",
+        title: "JOBS",
+        isMoney: false,
+        link: "See all jobs",
         icon: (
-          <MonetizationOnOutlinedIcon
-            className="icon"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
-          />
+          // <MonetizationOnOutlinedIcon
+          //   className="icon"
+          //   style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+          // />
+          <WorkOutlineIcon className="icon"
+          style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+        />
         ),
       };
       break;
-    case "balance":
+    case "application":
       data = {
-        title: "BALANCE",
-        isMoney: true,
+        title: "APPLICATIONS",
+        isMoney: false,
         link: "See details",
         icon: (
-          <AccountBalanceWalletOutlinedIcon
-            className="icon"
+          // <AccountBalanceWalletOutlinedIcon
+          //   className="icon"
+          //   style={{
+          //     backgroundColor: "rgba(128, 0, 128, 0.2)",
+          //     color: "purple",
+          //   }}
+          // />
+          <DomainVerificationOutlined
+          className="icon"
             style={{
               backgroundColor: "rgba(128, 0, 128, 0.2)",
               color: "purple",

@@ -1,0 +1,43 @@
+.reportCard{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+  &::before{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background-color: #a7a5a5;
+    top: -10px;
+  }
+  h2{
+    color: #585858;
+  }
+  .actions{
+    position: absolute;
+    top: 0;
+    right: 0;
+    .viewButton {
+    font-size: 18px;
+
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: darkblue;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+      background-color: #fff;
+    }
+    
+    .deleteButton {
+    font-size: 18px;
+
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: crimson;
+      border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+      background-color: #fff;
+    }
+  }
+}
