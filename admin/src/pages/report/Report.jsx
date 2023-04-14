@@ -9,6 +9,10 @@ import { publicRequest } from "../../requestMethods"
 const Report = () => {
 
   const [reportList, setReportList] = useState([]);
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    setList(reportList);
+  },[reportList]);
 
   useEffect(() => {
     const getReport = async () => {
@@ -30,8 +34,8 @@ const Report = () => {
         <Navbar />
         <div className="reportList">
           <h1>Reports List</h1>
-          {reportList.map(report =>
-            (<ReportCard key={report.reportId} report={report} />)
+          {list.map(report =>
+            (<ReportCard key={report.reportId} report={report} setList={setList} />)
           )}
           
 

@@ -75,9 +75,9 @@ const getById = async (req, res) => {
 };
 
 const registerCompany = async (req, res) => {
-  const { name, email, password } = req.body;
-  console.log(name + email + password);
-  if (!(name && email && password)) {
+  const { name, email, password, address, phone, logo_url } = req.body;
+  console.log(name + email + password + address + phone + logo_url);
+  if (!(name && email && password && address && phone && logo_url)) {
     return res.status(400).json("Not enough params");
   }
   try {
@@ -90,7 +90,10 @@ const registerCompany = async (req, res) => {
       const company = await CompanyModel.create({
         name,
         email,
-        password, 
+        password,
+        address,
+        phone,
+        logo_url,
       });
       return res.json(company);
     }
