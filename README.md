@@ -74,9 +74,9 @@ To run this project, you will need to add the following environment variables to
 
 - Full stack web
 - 3 role : Admin , User , Company
-- Admin : Create Account
-- User: Get user , Create User , Delete User , ...
-- Company : ...
+- Admin : Create Account, Delete User, Delete Rivew, DashBoard, Register Company , ...
+- User: Get user, Create User, Log In, Log Out, Update Profile, Upload Avatar, Upload CV, Review Company, Report Wrong Review, Search Job by location skills company, Apply Job
+- Company : Update Company Profile, See Review Company , See Apply Job , Report Review
 - There are many features will complete
 
 ## API Reference Example (There are many API I don't write here)
@@ -120,6 +120,6 @@ We are web developer
 
 
 ## 🛠 Skills
-Javascript, NodeJs,ReactJS , Express, PostgresQL, mongoDB, postman, ...
+Javascript, NodeJs, ReactJS, Express, PostgresQL, mongoDB, Postman, ...
 
 
