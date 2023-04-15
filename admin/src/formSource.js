@@ -42,36 +42,31 @@ export const userInputs = [
     },
   ];
   
-  export const productInputs = [
+  export const companyInputs = [
     {
       id: 1,
-      label: "Title",
+      label: "Company name",
       type: "text",
-      placeholder: "Apple Macbook Pro",
+      placeholder: "",
     },
     {
       id: 2,
-      label: "Description",
+      label: "Email",
       type: "text",
-      placeholder: "Description",
+      placeholder: "",
     },
     {
       id: 3,
-      label: "Category",
-      type: "text",
-      placeholder: "Computers",
+      label: "Password",
+      type: "password",
+      placeholder: "",
     },
     {
       id: 4,
-      label: "Price",
+      label: "Logo_url",
       type: "text",
-      placeholder: "100",
-    },
-    {
-      id: 5,
-      label: "Stock",
-      type: "text",
-      placeholder: "in stock",
-    },
+      placeholder: "",
+    }
+    
   ];
   

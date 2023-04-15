@@ -27,7 +27,7 @@ const Featured = () => {
   return (
     <div className="featured">
       <div className="container">
-        <h1>1400 Viec</h1>
+        <h1>3,578 IT Jobs</h1>
         <div className="search">
           {/* <div className="location" onClick={() => setOpen(!open)}>
             <FontAwesomeIcon icon={faLocationDot} />

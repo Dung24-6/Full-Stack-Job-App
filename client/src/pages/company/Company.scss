@@ -60,6 +60,24 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        button{
+          width: 180px;
+          margin-top: 10px;
+          color: #fff;
+          background-color: var(--primary);
+          font-size: 18px;
+          font-weight: 600;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(211, 5, 5);
+          }
+          &.disable{
+            background-color: #b4b1b1;
+            cursor: default;
+          }
+        }
         .primary {
           width: 180px;
           margin-top: 10px;
@@ -74,6 +92,7 @@
             background-color: rgb(211, 5, 5);
           }
         }
+        
         .outline {
           width: 180px;
           margin-top: 10px;
@@ -156,7 +175,7 @@
         h2 {
           color: #434242;
         }
-        .primary {
+        button {
           width: 100%;
           margin-top: 10px;
           color: #fff;
@@ -168,6 +187,10 @@
           cursor: pointer;
           &:hover {
             background-color: rgb(211, 5, 5);
+          }
+          &.disable{
+            background-color: #b4b1b1;
+            cursor: default;
           }
         }
       }

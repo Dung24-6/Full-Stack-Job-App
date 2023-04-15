@@ -22,15 +22,19 @@ const Job = () => {
         console.error(error);
       }
     };
-    getJob();
-  }, []);
+    if (jobId)  {
+      
+      getJob();
+    }
+  }, [jobId]);
   useEffect(() => {
     const getCompany = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/company/${job ? job.companyId : ""}`
+          `http://localhost:8000/company/${job.companyId}`
         );
         setCompany(response.data);
+
       } catch (error) {
         console.error(error);
       }

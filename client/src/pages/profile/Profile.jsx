@@ -52,7 +52,7 @@ const Profile = () => {
   const [email, setEmail] = useState(currentUser.email);
   const [phone, setPhone] = useState(currentUser.phone_number);
   const [skillSearch, setSkillSearch] = useState("");
-  const [mySkill, setMySkill] = useState(currentUser.skill?.split(","));
+  const [mySkill, setMySkill] = useState(currentUser.skill ? currentUser.skill.split(","):[]);
 
   const [file, setFile] = useState(
     currentUser.avatar_url?.replace("..\\client\\public", "\\public")
@@ -313,7 +313,7 @@ const Profile = () => {
                 skills
                   .filter(
                     (skill) =>
-                      !mySkill.includes(skill) && skill.includes(skillSearch)
+                      !mySkill?.includes(skill) && skill.includes(skillSearch)
                   )
                   .map((skill) => (
                     <span

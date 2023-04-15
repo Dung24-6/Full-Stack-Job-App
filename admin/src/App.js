@@ -4,7 +4,7 @@ import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import { productInputs, userInputs } from "./formSource";
+import { companyInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -35,7 +35,7 @@ function App() {
               <Route
                 path="new"
                 element={
-                  <New inputs={productInputs} title={"Create New Company"} />
+                  <New inputs={companyInputs} title={"Create New Company"} />
                 }
               />
             </Route>

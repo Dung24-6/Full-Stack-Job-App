@@ -3,9 +3,20 @@ import "./ReviewCard.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const ReviewCard = ({ review,setOpen,setReviewSelect }) => {
   const formattedDate = moment(review.created_at).fromNow();
+  const currentCompany = useSelector((state) => {
+    if (state.company.currentCompany) {
+      return state.company.currentCompany.company;
+    }
+  });
+  const currentUser = useSelector((state) => {
+    if (state.user.currentUser) {
+      return state.user.currentUser.user;
+    }
+  });
 
   let rating = [];
   for (let i = 0; i < review.rating; i++) {
@@ -31,8 +42,14 @@ const ReviewCard = ({ review,setOpen,setReviewSelect }) => {
       </div>
       <div className="date">{formattedDate}</div>
       <div className="description">{review.comment}</div>
-      <button className="primary" onClick={handleOpen}>Report</button>
+      
+      {(!currentCompany)&&currentUser && 
+      <button className="primary" onClick={handleOpen}>Report</button>}
+            
+          
+
     </div>
+
   );
 };
 
