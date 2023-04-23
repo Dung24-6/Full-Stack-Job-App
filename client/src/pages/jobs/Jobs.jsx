@@ -17,6 +17,7 @@ const Jobs = () => {
 
   const location = useLocation();
   const prompt = location.search;
+  const skills = location.pathname.split('/')[2];
   const [jobSelect, setJobSelect] = useState(0);
   const [filter, setFilter] = useState({});
 
@@ -35,11 +36,17 @@ const Jobs = () => {
             `http://localhost:8000/job/searchJob${prompt}`
           );
           setJobs(response.data);
-        } else {
+        } else if (!skills) {
           const response = await axios.get(
             `http://localhost:8000/job/searchAllJob`
           );
           setJobs(response.data);
+        } else {
+          const response = await axios.get(
+            `http://localhost:8000/job/searchJobBySkill`
+          );
+          setJobs(response.data);
+
         }
       } catch (error) {
         console.error(error);
