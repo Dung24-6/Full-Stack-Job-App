@@ -18,14 +18,14 @@ const Home = () => {
           <Widget type='job'/>
           <Widget type='application'/>
         </div>
-        <div className="charts">
+        {/* <div className="charts">
           <Featured/>
           <Chart aspect={3/1} title={'Last 6 Months (Revenue)'}/>
         </div>
         <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
           <Table/>
-        </div>
+        </div> */}
       </div>
     </div>
   )

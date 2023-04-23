@@ -9,6 +9,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import { useEffect, useState } from "react";
 import { publicRequest } from "../../requestMethods";
 import { DomainVerificationOutlined } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
@@ -35,6 +36,7 @@ const Widget = ({ type }) => {
         title: "USERS",
         isMoney: false,
         link: "See all users",
+        to:'/users',
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -51,6 +53,8 @@ const Widget = ({ type }) => {
         title: "COMPANIES",
         isMoney: false,
         link: "See all companies",
+        to:'/companies',
+
         icon: (
           // <ShoppingCartOutlinedIcon
           //   className="icon"
@@ -73,6 +77,8 @@ const Widget = ({ type }) => {
         title: "JOBS",
         isMoney: false,
         link: "See all jobs",
+        to:'/users',
+
         icon: (
           // <MonetizationOnOutlinedIcon
           //   className="icon"
@@ -89,6 +95,8 @@ const Widget = ({ type }) => {
         title: "APPLICATIONS",
         isMoney: false,
         link: "See details",
+        to:'/users',
+
         icon: (
           // <AccountBalanceWalletOutlinedIcon
           //   className="icon"
@@ -118,7 +126,11 @@ const Widget = ({ type }) => {
         <span className="counter">
           {data.isMoney && "$"} {amount}
         </span>
-        <span className="link">{data.link}</span>
+          <Link to={data.to}>
+        <span className="link">
+        {data.link}
+        </span>
+        </Link>
       </div>
       <div className="right">
         <div className="percentage positive">
