@@ -66,6 +66,10 @@ function App() {
           element: <Jobs />,
         },
         {
+          path: "/jobs/skills",
+          element: <Jobs />,
+        },
+        {
           path: "/apply/:jobId",
           element: <ApplyJob />,
         },
