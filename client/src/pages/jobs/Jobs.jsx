@@ -8,16 +8,22 @@ import { useLocation } from "react-router-dom";
 import Filter from "../../components/filter/Filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [jobsFiltered, setJobsFiltered] = useState([]);
+  const currentUser = useSelector((state) => {
+    if (state.user.currentUser) {
+      return state.user.currentUser.user;
+    }
+  });
 
   const [company, setCompany] = useState("");
 
   const location = useLocation();
   const prompt = location.search;
-  const skills = location.pathname.split('/')[2];
+  const skill = location.pathname.split('/')[2];
   const [jobSelect, setJobSelect] = useState(0);
   const [filter, setFilter] = useState({});
 
@@ -36,14 +42,14 @@ const Jobs = () => {
             `http://localhost:8000/job/searchJob${prompt}`
           );
           setJobs(response.data);
-        } else if (!skills) {
+        } else if (!skill) {
           const response = await axios.get(
             `http://localhost:8000/job/searchAllJob`
           );
           setJobs(response.data);
         } else {
           const response = await axios.get(
-            `http://localhost:8000/job/searchJobBySkill`
+            `http://localhost:8000/job/searchJobBySkill?skill=${currentUser.skill}`
           );
           setJobs(response.data);
 
