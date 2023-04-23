@@ -86,6 +86,10 @@ function App() {
           element: <CreateJob />,
         },
         {
+          path: "/modifyJob/:id",
+          element: <CreateJob />,
+        },
+        {
           path: "/apply/user",
           element: <ApplyList type='user' />,
         },

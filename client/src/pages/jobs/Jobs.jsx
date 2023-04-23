@@ -49,7 +49,7 @@ const Jobs = () => {
           setJobs(response.data);
         } else {
           const response = await axios.get(
-            `http://localhost:8000/job/searchJobBySkill?skill=${currentUser.skill}`
+            `http://localhost:8000/job/searchJobBySkill?skills=${currentUser.skill}`
           );
           setJobs(response.data);
 

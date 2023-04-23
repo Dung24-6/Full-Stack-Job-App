@@ -56,9 +56,7 @@ const Navbar = () => {
           <Link to="/companies" className="link">
             <span>IT Companies</span>
           </Link>
-          <Link to="/jobs/skills" className="link">
-            <span>Suggest Jobs</span>
-          </Link>
+          
         </div>
         <div className="right">
           {(!currentUser) && (!currentCompany) ? (

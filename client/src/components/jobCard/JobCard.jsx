@@ -62,7 +62,8 @@ const JobCard = ({ job, selected, setJobs }) => {
       </div>
       <div className="more">
         {currentCompany?.companyId === company.companyId && <button className="primary" onClick={handleDelete}>Xóa Job</button>}
-        <div className="hot">Hot</div>
+        {!currentCompany && <div className='hot'>Hot</div>}
+        {currentCompany?.companyId === company.companyId && <button className='outline' ><Link to={`/modifyJob/${job.jobId}`}>Modify</Link></button>}
         <div>{job.location}</div>
         <div>{formattedDate === 'a few seconds ago' ? '1 hour ago' : formattedDate}</div>
       </div>

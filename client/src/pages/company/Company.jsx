@@ -57,7 +57,7 @@ const Company = () => {
       }
     };
     getCompany();
-  }, []);
+  }, [companyId]);
   useEffect(() => {
     const getJobs = async () => {
       try {

@@ -21,6 +21,6 @@ router.delete('/:jobId', JobController.deleteJob)
 
 router.get('/getJobCount', checkAdmin.checkAdmin, JobController.getJobCount)
 
-router.put('/updateJob/:jobId', lockRowMiddleware.lockRowMiddleware, updateJob)
+router.put('/updateJob/:jobId', JobController.updateJob)
 
 module.exports = router

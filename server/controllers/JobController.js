@@ -59,7 +59,11 @@ const searchJobBySkill = async (req, res) => {
     // Tìm kiếm các công việc có chứa các skill trong mảng skillsArr
     const jobs = await JobsModel.findAll({
       where: {
-        skills: { [Op.overlap]: skillsArr }
+        [Op.or]: [
+          { title: { [Op.iLike]: `%${skills}%` } },
+          { skills: { [Op.overlap]: skillsArr } },
+          { description: { [Op.iLike]: `%${skills}%` } }
+        ]
       }
     })
 
@@ -68,6 +72,8 @@ const searchJobBySkill = async (req, res) => {
     return res.status(500).json({ error: err.message })
   }
 }
+
+
 
 const searchJob = async (req, res) => {
   const { prompt } = req.query
@@ -163,7 +169,7 @@ const getJobCount = async (req, res) => {
 }
 
 const updateJob = async (req, res) => {
-  const { jobId } = req.params
+  const { jobId } = req.params;
   const { title, salary, requirement, description } = req.body
 
   if (!(title && salary && requirement && description)) {
@@ -171,21 +177,65 @@ const updateJob = async (req, res) => {
   }
 
   try {
-    const job = await JobsModel.findByPk(jobId)
+    const job = await JobsModel.findOne({ where: { jobId } });
     if (!job) {
-      return res.status(404).json('Job not found')
+      return res.status(404).json("Job not found");
     }
-    const updatedJob = await job.update({
-      title,
-      salary,
-      requirement,
-      description
-    })
-    return res.status(200).json(updatedJob)
+
+   
+    if (title) {
+      job.title = title;
+    }
+    if (salary) {
+      job.salary = salary;
+    }
+    if (requirement) {
+      job.requirement = requirement;
+    }
+    if (description) {
+      job.description = description;
+    }
+    await job.save();
+    return res.status(200).json(job);
   } catch (err) {
     return res.status(500).json({ error: err.message })
   }
 }
+
+// const updateJob = async (req, res) => {
+//   const { title, salary, requirement, description } = req.body
+//   const job = req.job;
+//     if (!job) {
+//       return res.status(404).json("Job not found");
+//     }
+//     console.log(job);
+
+//   if (!(title && salary && requirement && description)) {
+//     return res.status(400).json('Not enough params')
+//   }
+
+//   try {
+    
+
+   
+//     if (title) {
+//       job.title = title;
+//     }
+//     if (salary) {
+//       job.salary = salary;
+//     }
+//     if (requirement) {
+//       job.requirement = requirement;
+//     }
+//     if (description) {
+//       job.description = description;
+//     }
+//     await job.save();
+//     return res.status(200).json(job);
+//   } catch (err) {
+//     return res.status(500).json({ error: err.message })
+//   }
+// }
 
 module.exports = {
   createJob,
